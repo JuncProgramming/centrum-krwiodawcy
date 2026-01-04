@@ -46,6 +46,14 @@ export type StatusCardProps = {
   onTargetDonationTypeChange: (type: string) => void;
 };
 
+export type StatisticsCardProps = {
+  donations: Donation[];
+};
+
+export type useStatisticsArgs = {
+  donations: Donation[];
+};
+
 export type DonationsHistoryCardProps = {
   donations: Donation[];
   onClick: () => void;
