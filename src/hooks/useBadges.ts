@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
-import type { BadgeComponentProps } from '@/types';
+import type { useBadgesArgs } from '@/types';
 import { badges } from '@/data/badges';
 import { normalizeType } from '@/utils';
 import { TYPE_VOLUME_MULTIPLIER } from '@/constants';
 
-export const useBadges = ({ donations, gender }: BadgeComponentProps) => {
+export const useBadges = ({ donations, gender }: useBadgesArgs) => {
   const stats = useMemo(() => {
     // To confirm with the RCKiK, don't know the convertion
     const totalLiters = donations.reduce((acc, curr) => {

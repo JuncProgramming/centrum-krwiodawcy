@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import type { BadgeComponentProps } from '@/types';
+import type { BadgesCardProps, } from '@/types';
 import { Medal, ChevronDown } from 'lucide-react';
 import { useBadges } from '@/hooks/useBadges';
 
-const BadgesGalleryCard = ({ donations, gender }: BadgeComponentProps) => {
+const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
   const { badges } = useBadges({ donations, gender });
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 

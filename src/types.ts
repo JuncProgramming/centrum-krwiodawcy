@@ -54,6 +54,11 @@ export type useStatisticsArgs = {
   donations: Donation[];
 };
 
+export type useDonationsArgs = {
+  userId: string | undefined;
+  targetDonationType: string;
+};
+
 export type DonationsHistoryCardProps = {
   donations: Donation[];
   onClick: () => void;
@@ -73,7 +78,12 @@ export type ConfirmModalProps = {
   variant?: 'danger' | 'info';
 };
 
-export type BadgeComponentProps = {
+export type BadgesCardProps = {
+  donations: Donation[];
+  gender: string;
+};
+
+export type useBadgesArgs = {
   donations: Donation[];
   gender: string;
 };

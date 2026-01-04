@@ -1,9 +1,9 @@
-import type { BadgeComponentProps } from '@/types';
+import type { BadgesCardProps } from '@/types';
 import { Medal } from 'lucide-react';
 import { useBadges } from '@/hooks/useBadges';
 import { getDonationsWordForm } from '@/utils';
 
-const BadgeGoalCard = ({ donations, gender }: BadgeComponentProps) => {
+const BadgeGoalCard = ({ donations, gender }: BadgesCardProps) => {
   const { nextBadge, currentBadge, progress, missingLiters } = useBadges({
     donations,
     gender

@@ -4,11 +4,12 @@ import { toast } from 'react-toastify';
 import type { Donation } from '@/types';
 import { MAX_FILE_SIZE } from '@/constants';
 import { calculateNextDonationDate } from '@/utils';
+import type { useDonationsArgs } from '@/types';
 
-export function useDonations(
-  userId: string | undefined,
-  targetDonationType: string = 'krew_pelna'
-) {
+export function useDonations({
+  userId,
+  targetDonationType = 'krew_pelna'
+}: useDonationsArgs) {
   const [donations, setDonations] = useState<Donation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
