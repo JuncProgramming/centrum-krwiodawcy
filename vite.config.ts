@@ -7,7 +7,7 @@ import { fileURLToPath, URL } from 'node:url';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/kalendarz-krwiodawcy/',
+  base: '/centrum-krwiodawcy/',
   plugins: [
     tanstackRouter({
       target: 'react',

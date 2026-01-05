@@ -10,27 +10,18 @@ import type { Donation } from '@/types';
 describe('utils', () => {
   describe('normalizeType', () => {
     it('should return "krew_pelna" when "Krew pełna" or "krew_pelna" is passed in', () => {
-      const normalizedFromLabel = normalizeType('Krew pełna');
-      const normalizedFromKey = normalizeType('krew_pelna');
-
-      expect(normalizedFromLabel).toBe('krew_pelna');
-      expect(normalizedFromKey).toBe('krew_pelna');
+      expect(normalizeType('Krew pełna')).toBe('krew_pelna');
+      expect(normalizeType('krew_pelna')).toBe('krew_pelna');
     });
 
     it('should return "osocze" when "Osocze" or "osocze" is passed in', () => {
-      const normalizedFromLabel = normalizeType('Osocze');
-      const normalizedFromKey = normalizeType('osocze');
-
-      expect(normalizedFromLabel).toBe('osocze');
-      expect(normalizedFromKey).toBe('osocze');
+      expect(normalizeType('Osocze')).toBe('osocze');
+      expect(normalizeType('osocze')).toBe('osocze');
     });
 
     it('should return "plytki_krwi" when "Płytki krwi" or "plytki_krwi" is passed in', () => {
-      const normalizedFromLabel = normalizeType('Płytki krwi');
-      const normalizedFromKey = normalizeType('plytki_krwi');
-
-      expect(normalizedFromLabel).toBe('plytki_krwi');
-      expect(normalizedFromKey).toBe('plytki_krwi');
+      expect(normalizeType('Płytki krwi')).toBe('plytki_krwi');
+      expect(normalizeType('plytki_krwi')).toBe('plytki_krwi');
     });
 
     it('should return "krew_pelna" when an empty string is passed in', () => {
@@ -38,13 +29,9 @@ describe('utils', () => {
     });
 
     it('should return "krew_pelna" when string other than the set strings is passed in', () => {
-      const normalizedFromRandom = normalizeType('random');
-      const normalizedFromAbc = normalizeType('abc');
-      const normalizedFromNumber = normalizeType('123');
-
-      expect(normalizedFromRandom).toBe('krew_pelna');
-      expect(normalizedFromAbc).toBe('krew_pelna');
-      expect(normalizedFromNumber).toBe('krew_pelna');
+      expect(normalizeType('random')).toBe('krew_pelna');
+      expect(normalizeType('abc')).toBe('krew_pelna');
+      expect(normalizeType('123')).toBe('krew_pelna');
     });
   });
 
