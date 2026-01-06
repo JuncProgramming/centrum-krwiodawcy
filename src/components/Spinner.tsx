@@ -12,9 +12,7 @@ function Spinner({ size = 'md' }: SpinnerProps) {
       className={`${sizeClasses[size]} border-zinc-200 border-t-red-600 rounded-full animate-spin`}
       role='status'
       aria-label='Ładowanie'
-    >
-      <span className='sr-only'>Ładowanie...</span>
-    </div>
+    ></div>
   );
 }
 
