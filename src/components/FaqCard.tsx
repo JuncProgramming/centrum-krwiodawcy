@@ -23,6 +23,7 @@ function FaqCard({ question, children }: FaqCardProps) {
       </div>
 
       <div
+        data-testid='faq-accordion'
         className={`grid transition-all duration-300 ease-in-out ${
           isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
         }`}
