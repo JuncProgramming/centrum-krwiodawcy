@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { type DonationType } from '@/types';
 import { calculateNextDonationDate } from '@/utils';
+import { DONATION_LABELS } from '@/constants';
 
 export function DonationCalculator() {
   const [lastDonationDate, setLastDonationDate] = useState(
@@ -62,7 +63,9 @@ export function DonationCalculator() {
                 }
                 className='w-4 h-4 text-red-600 focus:ring-red-500'
               />
-              <span className='ml-3 text-zinc-700'>Krew pełna</span>
+              <span className='ml-3 text-zinc-700'>
+                {DONATION_LABELS.krew_pelna}
+              </span>
             </label>
             <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
               <input
@@ -75,7 +78,9 @@ export function DonationCalculator() {
                 }
                 className='w-4 h-4 text-red-600 focus:ring-red-500'
               />
-              <span className='ml-3 text-zinc-700'>Osocze (Plazma)</span>
+              <span className='ml-3 text-zinc-700'>
+                {DONATION_LABELS.osocze} (Plazma)
+              </span>
             </label>
             <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
               <input
@@ -89,7 +94,7 @@ export function DonationCalculator() {
                 className='w-4 h-4 text-red-600 focus:ring-red-500'
               />
               <span className='ml-3 text-zinc-700'>
-                Płytki krwi (Trombocyty)
+                {DONATION_LABELS.plytki_krwi} (Trombocyty)
               </span>
             </label>
           </div>
@@ -111,7 +116,9 @@ export function DonationCalculator() {
                 }
                 className='w-4 h-4 text-red-600 focus:ring-red-500'
               />
-              <span className='ml-3 text-zinc-700'>Krew pełna</span>
+              <span className='ml-3 text-zinc-700'>
+                {DONATION_LABELS.krew_pelna}
+              </span>
             </label>
             <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
               <input
@@ -124,7 +131,9 @@ export function DonationCalculator() {
                 }
                 className='w-4 h-4 text-red-600 focus:ring-red-500'
               />
-              <span className='ml-3 text-zinc-700'>Osocze (Plazma)</span>
+              <span className='ml-3 text-zinc-700'>
+                {DONATION_LABELS.osocze} (Plazma)
+              </span>
             </label>
             <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
               <input
@@ -138,7 +147,7 @@ export function DonationCalculator() {
                 className='w-4 h-4 text-red-600 focus:ring-red-500'
               />
               <span className='ml-3 text-zinc-700'>
-                Płytki krwi (Trombocyty)
+                {DONATION_LABELS.plytki_krwi} (Trombocyty)
               </span>
             </label>
           </div>

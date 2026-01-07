@@ -1,15 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { BaseDashboardCard } from './BaseDashboardCard';
 import { calculateTaxRelief } from '@/utils';
-import type { Donation } from '@/types';
+import type { DonationCalculatorProps } from '@/types';
 import { ChevronDown } from 'lucide-react';
 
-type DonationCalculatorProps = {
-  donations: Donation[];
-};
+const currentYear = new Date().getFullYear();
 
 export function TaxReliefCalculator({ donations }: DonationCalculatorProps) {
-  const currentYear = new Date().getFullYear();
   const [selectedYear, setSelectedYear] = useState(currentYear);
   const [isYearPickerOpen, setIsYearPickerOpen] = useState(false);
   const pickerRef = useRef<HTMLDivElement>(null);

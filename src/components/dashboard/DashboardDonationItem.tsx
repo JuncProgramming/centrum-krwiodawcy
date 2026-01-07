@@ -1,6 +1,7 @@
 import { Paperclip, Trash2, Calendar, MapPin, FileText } from 'lucide-react';
 import { type Donation } from '@/types';
 import { useRef } from 'react';
+import { DONATION_LABELS } from '@/constants';
 
 export function DonationItem({
   donation,
@@ -26,7 +27,9 @@ export function DonationItem({
     <div className='p-3 sm:p-4 bg-white border border-zinc-200 rounded-md transition-shadow hover:shadow-sm flex justify-between items-start gap-3 sm:gap-4'>
       <div className='min-w-0 flex-1'>
         <div className='flex flex-wrap items-center gap-x-2 gap-y-1 mb-1.5'>
-          <p className='font-semibold text-zinc-800'>{donation.type}</p>
+          <p className='font-semibold text-zinc-800'>
+            {DONATION_LABELS[donation.type]}
+          </p>
           {donation.amount > 0 && (
             <span className='text-xs text-red-700 bg-red-100 px-2 py-0.5 rounded-full whitespace-nowrap'>
               {donation.amount} ml

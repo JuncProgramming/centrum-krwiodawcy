@@ -1,15 +1,15 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Upload } from 'lucide-react';
 import Spinner from '@/components/Spinner';
 import { type AddDonationModalProps } from '@/types';
 import { toast } from 'react-toastify';
-import { MAX_FILE_SIZE } from '@/constants';
+import { MAX_FILE_SIZE, DONATION_LABELS } from '@/constants';
 
 export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
-  const defaultDate = useMemo(() => new Date().toISOString().split('T')[0], []);
-
-  const [date, setDate] = useState(defaultDate);
-  const [type, setType] = useState('Krew pełna');
+  const [date, setDate] = useState(
+    () => new Date().toISOString().split('T')[0]
+  );
+  const [type, setType] = useState('krew_pelna');
   const [amount, setAmount] = useState(450);
   const [location, setLocation] = useState('RCKiK Warszawa');
   const [file, setFile] = useState<File | null>(null);
@@ -43,9 +43,9 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
 
   const handleTypeChange = (newType: string) => {
     setType(newType);
-    if (newType === 'Krew pełna') setAmount(450);
-    if (newType === 'Osocze') setAmount(650);
-    if (newType === 'Płytki krwi') setAmount(500);
+    if (newType === 'krew_pelna') setAmount(450);
+    if (newType === 'osocze') setAmount(650);
+    if (newType === 'plytki_krwi') setAmount(500);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -135,18 +135,18 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                       <input
                         type='radio'
                         name='donationType'
-                        value='Krew pełna'
-                        checked={type === 'Krew pełna'}
+                        value='krew_pelna'
+                        checked={type === 'krew_pelna'}
                         onChange={(e) => handleTypeChange(e.target.value)}
                         className='w-4 h-4 text-red-600 focus:ring-red-500 shrink-0'
                       />
                       <span className='ml-2 text-sm text-zinc-700 truncate'>
-                        Krew pełna
+                        {DONATION_LABELS.krew_pelna}
                       </span>
                     </label>
                     <div
                       className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                        type === 'Krew pełna'
+                        type === 'krew_pelna'
                           ? 'w-24 opacity-100 ml-2'
                           : 'w-0 opacity-0 ml-0'
                       }`}
@@ -170,8 +170,8 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                       <input
                         type='radio'
                         name='donationType'
-                        value='Osocze'
-                        checked={type === 'Osocze'}
+                        value='osocze'
+                        checked={type === 'osocze'}
                         onChange={(e) => handleTypeChange(e.target.value)}
                         className='w-4 h-4 text-red-600 focus:ring-red-500 shrink-0'
                       />
@@ -181,7 +181,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                     </label>
                     <div
                       className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                        type === 'Osocze'
+                        type === 'osocze'
                           ? 'w-24 opacity-100 ml-2'
                           : 'w-0 opacity-0 ml-0'
                       }`}
@@ -205,8 +205,8 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                       <input
                         type='radio'
                         name='donationType'
-                        value='Płytki krwi'
-                        checked={type === 'Płytki krwi'}
+                        value='plytki_krwi'
+                        checked={type === 'plytki_krwi'}
                         onChange={(e) => handleTypeChange(e.target.value)}
                         className='w-4 h-4 text-red-600 focus:ring-red-500 shrink-0'
                       />
@@ -216,7 +216,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                     </label>
                     <div
                       className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                        type === 'Płytki krwi'
+                        type === 'plytki_krwi'
                           ? 'w-24 opacity-100 ml-2'
                           : 'w-0 opacity-0 ml-0'
                       }`}

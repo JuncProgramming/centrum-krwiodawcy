@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import type { StatusCardProps, DonationType } from '@/types';
+import { useState, useEffect } from 'react';
+import type { StatusCardProps } from '@/types';
+import { STATUS_CARD_LABELS, DONATION_TYPES_ORDER } from '@/constants';
 
 export default function StatusCard({
   daysRemaining,
@@ -11,15 +12,9 @@ export default function StatusCard({
 }: StatusCardProps) {
   const [displayedType, setDisplayedType] = useState(targetDonationType);
 
-  if (canDonate && displayedType !== targetDonationType) {
+  useEffect(() => {
     setDisplayedType(targetDonationType);
-  }
-
-  const donationTypes: { id: DonationType; label: string }[] = [
-    { id: 'krew_pelna', label: 'Krew' },
-    { id: 'osocze', label: 'Osocze' },
-    { id: 'plytki_krwi', label: 'Płytki' }
-  ];
+  }, [targetDonationType]);
 
   return (
     <section
@@ -43,12 +38,12 @@ export default function StatusCard({
             canDonate ? 'bg-green-900/5' : 'bg-zinc-100'
           }`}
         >
-          {donationTypes.map((type) => (
+          {DONATION_TYPES_ORDER.map((type) => (
             <button
-              key={type.id}
-              onClick={() => onTargetDonationTypeChange(type.id)}
+              key={type}
+              onClick={() => onTargetDonationTypeChange(type)}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex-1 md:flex-none justify-center ${
-                targetDonationType === type.id
+                targetDonationType === type
                   ? `bg-white shadow-sm ${
                       canDonate ? 'text-green-700' : 'text-zinc-800'
                     }`
@@ -59,7 +54,7 @@ export default function StatusCard({
                     }`
               }`}
             >
-              {type.label}
+              {STATUS_CARD_LABELS[type]}
             </button>
           ))}
         </div>

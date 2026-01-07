@@ -15,6 +15,10 @@ export type SpinnerProps = {
   size?: 'sm' | 'md' | 'lg';
 };
 
+export type DonationCalculatorProps = {
+  donations: Donation[];
+};
+
 export type FaqCardProps = {
   question: string;
   children: ReactNode;

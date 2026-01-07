@@ -21,8 +21,8 @@ export const normalizeType = (type: string) => {
 
 export const calculateNextDonationDate = (
   lastDonationDateStr: string,
-  lastDonationType: string = 'Krew pełna',
-  targetDonationType: string = 'Krew pełna'
+  lastDonationType: string = 'krew_pelna',
+  targetDonationType: string = 'krew_pelna'
 ) => {
   const lastType = normalizeType(lastDonationType);
   const targetType = normalizeType(targetDonationType);
