@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 export function useStatistics({ donations }: useStatisticsArgs) {
   const stats = useMemo(() => {
-    const statsByType = donations.reduce(
+    const rawStatsByType = donations.reduce(
       (acc, curr) => {
         const type = normalizeType(curr.type);
         let volume = 0;
@@ -19,6 +19,13 @@ export function useStatistics({ donations }: useStatisticsArgs) {
       },
       { total: 0, krew_pelna: 0, osocze: 0, plytki_krwi: 0 }
     );
+
+    const statsByType = {
+      total: parseFloat(rawStatsByType.total.toFixed(2)),
+      krew_pelna: parseFloat(rawStatsByType.krew_pelna.toFixed(2)),
+      osocze: parseFloat(rawStatsByType.osocze.toFixed(2)),
+      plytki_krwi: parseFloat(rawStatsByType.plytki_krwi.toFixed(2))
+    };
 
     const totalLiters = parseFloat(statsByType.total.toFixed(2));
 

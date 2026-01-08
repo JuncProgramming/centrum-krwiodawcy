@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { BadgesCardProps, } from '@/types';
+import type { BadgesCardProps } from '@/types';
 import { Medal, ChevronDown } from 'lucide-react';
 import { useBadges } from '@/hooks/useBadges';
 
