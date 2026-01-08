@@ -54,7 +54,7 @@ function Dashboard() {
     daysRemaining,
     canDonate,
     progress
-  } = useDonations(user.id, targetDonationType);
+  } = useDonations({ userId: user.id, targetDonationType });
 
   useEffect(() => {
     const {
