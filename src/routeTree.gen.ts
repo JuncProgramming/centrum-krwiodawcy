@@ -8,81 +8,81 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as UpdatePasswordIndexRouteImport } from './routes/update-password/index'
-import { Route as RegisterIndexRouteImport } from './routes/register/index'
-import { Route as LoginIndexRouteImport } from './routes/login/index'
-import { Route as ForgotPasswordIndexRouteImport } from './routes/forgot-password/index'
-import { Route as FaqIndexRouteImport } from './routes/faq/index'
-import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as rootRouteImport } from './routes/__root';
+import { Route as IndexRouteImport } from './routes/index';
+import { Route as UpdatePasswordIndexRouteImport } from './routes/update-password/index';
+import { Route as RegisterIndexRouteImport } from './routes/register/index';
+import { Route as LoginIndexRouteImport } from './routes/login/index';
+import { Route as ForgotPasswordIndexRouteImport } from './routes/forgot-password/index';
+import { Route as FaqIndexRouteImport } from './routes/faq/index';
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index';
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+  getParentRoute: () => rootRouteImport
+} as any);
 const UpdatePasswordIndexRoute = UpdatePasswordIndexRouteImport.update({
   id: '/update-password/',
   path: '/update-password/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+  getParentRoute: () => rootRouteImport
+} as any);
 const RegisterIndexRoute = RegisterIndexRouteImport.update({
   id: '/register/',
   path: '/register/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+  getParentRoute: () => rootRouteImport
+} as any);
 const LoginIndexRoute = LoginIndexRouteImport.update({
   id: '/login/',
   path: '/login/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+  getParentRoute: () => rootRouteImport
+} as any);
 const ForgotPasswordIndexRoute = ForgotPasswordIndexRouteImport.update({
   id: '/forgot-password/',
   path: '/forgot-password/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+  getParentRoute: () => rootRouteImport
+} as any);
 const FaqIndexRoute = FaqIndexRouteImport.update({
   id: '/faq/',
   path: '/faq/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+  getParentRoute: () => rootRouteImport
+} as any);
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/dashboard/',
   path: '/dashboard/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+  getParentRoute: () => rootRouteImport
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/dashboard': typeof DashboardIndexRoute
-  '/faq': typeof FaqIndexRoute
-  '/forgot-password': typeof ForgotPasswordIndexRoute
-  '/login': typeof LoginIndexRoute
-  '/register': typeof RegisterIndexRoute
-  '/update-password': typeof UpdatePasswordIndexRoute
+  '/': typeof IndexRoute;
+  '/dashboard': typeof DashboardIndexRoute;
+  '/faq': typeof FaqIndexRoute;
+  '/forgot-password': typeof ForgotPasswordIndexRoute;
+  '/login': typeof LoginIndexRoute;
+  '/register': typeof RegisterIndexRoute;
+  '/update-password': typeof UpdatePasswordIndexRoute;
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/dashboard': typeof DashboardIndexRoute
-  '/faq': typeof FaqIndexRoute
-  '/forgot-password': typeof ForgotPasswordIndexRoute
-  '/login': typeof LoginIndexRoute
-  '/register': typeof RegisterIndexRoute
-  '/update-password': typeof UpdatePasswordIndexRoute
+  '/': typeof IndexRoute;
+  '/dashboard': typeof DashboardIndexRoute;
+  '/faq': typeof FaqIndexRoute;
+  '/forgot-password': typeof ForgotPasswordIndexRoute;
+  '/login': typeof LoginIndexRoute;
+  '/register': typeof RegisterIndexRoute;
+  '/update-password': typeof UpdatePasswordIndexRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/dashboard/': typeof DashboardIndexRoute
-  '/faq/': typeof FaqIndexRoute
-  '/forgot-password/': typeof ForgotPasswordIndexRoute
-  '/login/': typeof LoginIndexRoute
-  '/register/': typeof RegisterIndexRoute
-  '/update-password/': typeof UpdatePasswordIndexRoute
+  __root__: typeof rootRouteImport;
+  '/': typeof IndexRoute;
+  '/dashboard/': typeof DashboardIndexRoute;
+  '/faq/': typeof FaqIndexRoute;
+  '/forgot-password/': typeof ForgotPasswordIndexRoute;
+  '/login/': typeof LoginIndexRoute;
+  '/register/': typeof RegisterIndexRoute;
+  '/update-password/': typeof UpdatePasswordIndexRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | '/'
     | '/dashboard'
@@ -90,8 +90,8 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/register'
-    | '/update-password'
-  fileRoutesByTo: FileRoutesByTo
+    | '/update-password';
+  fileRoutesByTo: FileRoutesByTo;
   to:
     | '/'
     | '/dashboard'
@@ -99,7 +99,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/register'
-    | '/update-password'
+    | '/update-password';
   id:
     | '__root__'
     | '/'
@@ -108,70 +108,70 @@ export interface FileRouteTypes {
     | '/forgot-password/'
     | '/login/'
     | '/register/'
-    | '/update-password/'
-  fileRoutesById: FileRoutesById
+    | '/update-password/';
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  DashboardIndexRoute: typeof DashboardIndexRoute
-  FaqIndexRoute: typeof FaqIndexRoute
-  ForgotPasswordIndexRoute: typeof ForgotPasswordIndexRoute
-  LoginIndexRoute: typeof LoginIndexRoute
-  RegisterIndexRoute: typeof RegisterIndexRoute
-  UpdatePasswordIndexRoute: typeof UpdatePasswordIndexRoute
+  IndexRoute: typeof IndexRoute;
+  DashboardIndexRoute: typeof DashboardIndexRoute;
+  FaqIndexRoute: typeof FaqIndexRoute;
+  ForgotPasswordIndexRoute: typeof ForgotPasswordIndexRoute;
+  LoginIndexRoute: typeof LoginIndexRoute;
+  RegisterIndexRoute: typeof RegisterIndexRoute;
+  UpdatePasswordIndexRoute: typeof UpdatePasswordIndexRoute;
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/update-password/': {
-      id: '/update-password/'
-      path: '/update-password'
-      fullPath: '/update-password'
-      preLoaderRoute: typeof UpdatePasswordIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/update-password/';
+      path: '/update-password';
+      fullPath: '/update-password';
+      preLoaderRoute: typeof UpdatePasswordIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/register/': {
-      id: '/register/'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof RegisterIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/register/';
+      path: '/register';
+      fullPath: '/register';
+      preLoaderRoute: typeof RegisterIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/login/': {
-      id: '/login/'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/login/';
+      path: '/login';
+      fullPath: '/login';
+      preLoaderRoute: typeof LoginIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/forgot-password/': {
-      id: '/forgot-password/'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof ForgotPasswordIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/forgot-password/';
+      path: '/forgot-password';
+      fullPath: '/forgot-password';
+      preLoaderRoute: typeof ForgotPasswordIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/faq/': {
-      id: '/faq/'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/faq/';
+      path: '/faq';
+      fullPath: '/faq';
+      preLoaderRoute: typeof FaqIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/dashboard/': {
-      id: '/dashboard/'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/dashboard/';
+      path: '/dashboard';
+      fullPath: '/dashboard';
+      preLoaderRoute: typeof DashboardIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
   }
 }
 
@@ -182,8 +182,8 @@ const rootRouteChildren: RootRouteChildren = {
   ForgotPasswordIndexRoute: ForgotPasswordIndexRoute,
   LoginIndexRoute: LoginIndexRoute,
   RegisterIndexRoute: RegisterIndexRoute,
-  UpdatePasswordIndexRoute: UpdatePasswordIndexRoute,
-}
+  UpdatePasswordIndexRoute: UpdatePasswordIndexRoute
+};
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
