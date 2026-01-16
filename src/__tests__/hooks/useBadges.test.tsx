@@ -78,14 +78,14 @@ describe('useBadges Hook', () => {
   it('should correctly sum up volumes from different donation types', () => {
     const mixedDonations: Donation[] = [
       { ...fakeDonation },
-      { ...fakeDonation, type: 'osocze' }
+      { ...fakeDonation, type: 'osocze', amount: 650 }
     ];
 
     const { result } = renderHook(() =>
       useBadges({ donations: mixedDonations, gender: 'male' })
     );
 
-    expect(result.current.totalLiters).toBe(1.05);
+    expect(result.current.totalLiters).toBe(1.1);
   });
 
   it('should use default multiplier when donation amount is missing or zero', () => {
