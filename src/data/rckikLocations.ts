@@ -1,13 +1,5 @@
 import type { LatLngBoundsExpression } from 'leaflet';
-
-export interface RCKiKLocation {
-  name: string;
-  address: string;
-  phone: string;
-  website: string;
-  mapCoords: [number, number];
-  googleMapsUrl: string;
-}
+import type { RCKiKLocation } from '@/types';
 
 export const polandBounds: LatLngBoundsExpression = [
   [48.0, 13.0],
