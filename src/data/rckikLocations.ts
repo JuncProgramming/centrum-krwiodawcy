@@ -1,3 +1,5 @@
+import type { LatLngBoundsExpression } from 'leaflet';
+
 export interface RCKiKLocation {
   name: string;
   address: string;
@@ -6,6 +8,11 @@ export interface RCKiKLocation {
   mapCoords: [number, number];
   googleMapsUrl: string;
 }
+
+export const polandBounds: LatLngBoundsExpression = [
+  [48.0, 13.0],
+  [56.0, 25.5]
+];
 
 export const rckikLocations: RCKiKLocation[] = [
   {
@@ -199,4 +206,4 @@ export const rckikLocations: RCKiKLocation[] = [
   }
 ];
 
-export const polandCenter: [number, number] = [52.0, 19.0];
+export const polandCenter: [number, number] = [52.5, 19.0];
