@@ -99,7 +99,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
             </h3>
             <button
               onClick={onClose}
-              className='p-2 rounded-md text-zinc-600 hover:text-zinc-800 transition-colors'
+              className='p-2 rounded-md text-zinc-600 hover:text-zinc-800 transition-colors cursor-pointer'
             >
               <X size={20} />
             </button>
@@ -300,7 +300,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
               <button
                 type='submit'
                 disabled={isSubmitting}
-                className='w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors flex justify-center items-center gap-2 disabled:opacity-70'
+                className='w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors flex justify-center items-center gap-2 disabled:opacity-70 cursor-pointer'
               >
                 {isSubmitting && <Spinner size='sm' />}
                 {isSubmitting ? 'Zapisywanie...' : 'Zapisz'}
