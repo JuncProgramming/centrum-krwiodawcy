@@ -11,7 +11,7 @@ function FaqCard({ question, children }: FaqCardProps) {
         <span className='font-semibold text-zinc-700'>{question}</span>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className='p-2 rounded-md hover:bg-zinc-100 transition-colors'
+          className='p-2 rounded-md hover:bg-zinc-100 transition-colors cursor-pointer'
           aria-label={isOpen ? 'Zwiń odpowiedź' : 'Rozwiń odpowiedź'}
         >
           <ChevronDown

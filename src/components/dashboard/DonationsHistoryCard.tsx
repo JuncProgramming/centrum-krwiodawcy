@@ -33,7 +33,7 @@ const DonationsHistoryCard = ({
       </div>
       <button
         onClick={onClick}
-        className='w-full mt-3 bg-red-600 text-white font-semibold py-2.5 px-6 rounded-md hover:bg-red-700 transition-colors flex items-center justify-center gap-2 shadow-sm'
+        className='w-full mt-3 bg-red-600 text-white font-semibold py-2.5 px-6 rounded-md hover:bg-red-700 transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer'
       >
         <Plus size={20} />
         Dodaj donację

@@ -13,7 +13,7 @@ const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
         <span className='font-medium text-zinc-700'>Galeria odznak</span>
         <button
           onClick={() => setIsGalleryOpen(!isGalleryOpen)}
-          className='p-2 rounded-md hover:bg-zinc-100 transition-colors'
+          className='p-2 rounded-md hover:bg-zinc-100 transition-colors cursor-pointer'
           aria-label={isGalleryOpen ? 'Zwiń galerię' : 'Rozwiń galerię'}
         >
           <ChevronDown

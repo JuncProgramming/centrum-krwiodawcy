@@ -156,7 +156,7 @@ export function DonationCalculator() {
 
       <button
         type='submit'
-        className='w-full mt-3 bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors'
+        className='w-full mt-3 bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors cursor-pointer'
       >
         Sprawdź termin
       </button>

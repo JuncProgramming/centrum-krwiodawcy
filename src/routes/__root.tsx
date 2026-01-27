@@ -29,7 +29,7 @@ function RootLayout() {
         closeButton={({ closeToast }) => (
           <button
             onClick={closeToast}
-            className='absolute top-2 right-2 p-1 rounded-md text-zinc-400 hover:text-zinc-600 transition-colors'
+            className='absolute top-2 right-2 p-1 rounded-md text-zinc-400 hover:text-zinc-600 transition-colors cursor-pointer'
           >
             <X size={16} />
           </button>

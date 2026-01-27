@@ -51,7 +51,7 @@ export function ConfirmModal({
             <button
               onClick={onClose}
               disabled={isLoading}
-              className='p-2 rounded-md text-zinc-600 hover:text-zinc-800 transition-colors'
+              className='p-2 rounded-md text-zinc-600 hover:text-zinc-800 transition-colors cursor-pointer'
             >
               <X size={20} />
             </button>
@@ -80,7 +80,7 @@ export function ConfirmModal({
                 type='button'
                 onClick={onClose}
                 disabled={isLoading}
-                className='px-4 py-2 text-sm font-medium text-zinc-700 bg-white border border-zinc-300 rounded-md hover:bg-zinc-50 focus:ring-zinc-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+                className='px-4 py-2 text-sm font-medium text-zinc-700 bg-white border border-zinc-300 rounded-md hover:bg-zinc-50 focus:ring-zinc-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
               >
                 {cancelLabel}
               </button>
@@ -90,7 +90,7 @@ export function ConfirmModal({
                   handleConfirm();
                 }}
                 disabled={isLoading}
-                className={`px-4 py-2 text-sm font-medium text-white rounded-md transition-colors flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed ${
+                className={`px-4 py-2 text-sm font-medium text-white rounded-md transition-colors flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer ${
                   variant === 'danger'
                     ? 'bg-red-600 hover:bg-red-700'
                     : 'bg-yellow-500 hover:bg-yellow-600'

@@ -63,7 +63,7 @@ export function Header() {
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className='flex items-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2 px-4 rounded-md hover:bg-zinc-100 transition-colors whitespace-nowrap'
+                  className='flex items-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2 px-4 rounded-md hover:bg-zinc-100 transition-colors whitespace-nowrap cursor-pointer'
                 >
                   <LogOut size={16} />
                   Wyloguj
@@ -90,7 +90,7 @@ export function Header() {
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className='md:hidden p-1.5 text-zinc-700 hover:bg-zinc-100 rounded-md transition-colors'
+            className='md:hidden p-1.5 text-zinc-700 hover:bg-zinc-100 rounded-md transition-colors cursor-pointer'
             aria-label='Toggle menu'
             aria-expanded={isMobileMenuOpen}
           >
@@ -136,7 +136,7 @@ export function Header() {
                       handleSignOut();
                       setIsMobileMenuOpen(false);
                     }}
-                    className='flex items-center justify-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2.5 px-3 rounded-md hover:bg-zinc-100 transition-colors mt-2'
+                    className='flex items-center justify-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2.5 px-3 rounded-md hover:bg-zinc-100 transition-colors mt-2 cursor-pointer'
                   >
                     <LogOut size={16} />
                     Wyloguj

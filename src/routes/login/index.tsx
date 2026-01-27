@@ -116,7 +116,7 @@ function LoginPage() {
             <button
               type='submit'
               disabled={loading}
-              className='w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2'
+              className='w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer'
             >
               {loading && <Spinner size='sm' />}
               {loading ? 'Logowanie...' : 'Zaloguj się'}
