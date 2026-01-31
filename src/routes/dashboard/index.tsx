@@ -11,6 +11,7 @@ import StatisticsCard from '@/components/dashboard/StatisticsCard';
 import { TaxReliefCalculator } from '@/components/dashboard/TaxReliefCalculator';
 import BadgeGoalCard from '@/components/dashboard/BadgeGoalCard';
 import BadgesGalleryCard from '@/components/dashboard/BadgesGalleryCard';
+import { RCKiKMapCard } from '@/components/dashboard/RCKiKMapCard';
 import { useDonations } from '@/hooks/useDonations';
 
 export const Route = createFileRoute('/dashboard/')({
@@ -126,6 +127,8 @@ function Dashboard() {
           <TaxReliefCalculator donations={donations} />
         </div>
       </div>
+
+      <RCKiKMapCard />
 
       {isModalOpen && (
         <AddDonationModal
