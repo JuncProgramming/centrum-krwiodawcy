@@ -43,7 +43,7 @@ export function RCKiKMapCard() {
           />
           {rckikLocations.map((location, index) => (
             <Marker key={index} position={location.mapCoords} icon={mapPinIcon}>
-              <Popup className='rckik-popup'>
+              <Popup className='rckik-popup' autoPanPadding={[20, 20]}>
                 <div className='min-w-60'>
                   <h4 className='font-semibold text-zinc-800 text-base leading-tight mb-3 pr-12'>
                     {location.name}
