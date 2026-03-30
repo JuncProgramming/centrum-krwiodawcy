@@ -5,8 +5,6 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build": "vite build && tsc",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
     "serve": "vite preview",
     "test": "vitest run",
     "lint": "eslint .",
@@ -46,7 +44,6 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "gh-pages": "^6.3.0",
     "globals": "^16.5.0",
     "jsdom": "^27.0.0",
     "prettier": "^3.7.4",
