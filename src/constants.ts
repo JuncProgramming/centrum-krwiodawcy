@@ -1,4 +1,4 @@
-import type { DonationType } from './types';
+import type { DonationType } from '@/types';
 
 export const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 MB
 export const TAX_RELIEF_PER_LITER = 130; /// 130zł

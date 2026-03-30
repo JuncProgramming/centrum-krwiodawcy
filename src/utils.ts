@@ -1,5 +1,5 @@
-import { TAX_RELIEF_PER_LITER, TYPE_VOLUME_MULTIPLIER } from './constants';
-import type { Donation } from './types';
+import { TAX_RELIEF_PER_LITER, TYPE_VOLUME_MULTIPLIER } from '@/constants';
+import type { Donation } from '@/types';
 
 export const normalizeType = (type: string) => {
   const cleanType = type.trim().toLowerCase();
@@ -114,4 +114,18 @@ export const getDonationsWordForm = (count: number) => {
   }
 
   return 'donacji';
+};
+
+export const buildGoogleMapsLink = (
+  coordinates: [number, number],
+  placeId?: string
+) => {
+  const destination = `${coordinates[1]},${coordinates[0]}`;
+  const destinationParam = encodeURIComponent(destination);
+
+  const googleMapsLink = placeId
+    ? `https://www.google.com/maps/dir/?api=1&destination=${destinationParam}&destination_place_id=${encodeURIComponent(placeId)}&dir_action=navigate`
+    : `https://www.google.com/maps/dir/?api=1&destination=${destinationParam}&dir_action=navigate`;
+
+  return googleMapsLink;
 };

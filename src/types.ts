@@ -8,7 +8,7 @@ export type RCKiKLocation = {
   phone: string;
   website: string;
   mapCoords: [number, number];
-  googleMapsUrl: string;
+  placeId?: string;
 };
 
 export type Donation = {

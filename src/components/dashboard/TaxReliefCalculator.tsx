@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { BaseDashboardCard } from './BaseDashboardCard';
+import { BaseDashboardCard } from '@/components/dashboard/BaseDashboardCard';
 import { calculateTaxRelief } from '@/utils';
 import type { DonationCalculatorProps } from '@/types';
 import { ChevronDown } from 'lucide-react';

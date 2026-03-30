@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
-import FaqCard from '../../components/FaqCard';
-import { faqData } from '../../data/faqData';
+import FaqCard from '@/components/FaqCard';
+import { faqData } from '@/data/faqData';
 
 export const Route = createFileRoute('/faq/')({
   component: FaqPage

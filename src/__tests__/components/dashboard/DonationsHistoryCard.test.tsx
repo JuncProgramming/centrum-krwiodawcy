@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import DonationsHistoryCard from '@/components/dashboard/DonationsHistoryCard'; // Sprawdź ścieżkę
+import DonationsHistoryCard from '@/components/dashboard/DonationsHistoryCard';
 import type { Donation } from '@/types';
 
 const fakeDonations: Donation[] = [

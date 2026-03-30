@@ -1,6 +1,6 @@
 import type { StatisticsCardProps } from '@/types';
 import { Droplet, Activity, Calendar, Hash } from 'lucide-react';
-import { BaseDashboardCard } from './BaseDashboardCard';
+import { BaseDashboardCard } from '@/components/dashboard/BaseDashboardCard';
 import { useStatistics } from '@/hooks/useStatistics';
 
 const StatisticsCard = ({ donations }: StatisticsCardProps) => {

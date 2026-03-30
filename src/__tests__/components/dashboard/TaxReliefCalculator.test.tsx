@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, type Mock } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { TaxReliefCalculator } from '@/components/dashboard/TaxReliefCalculator'; // Sprawdź ścieżkę
+import { TaxReliefCalculator } from '@/components/dashboard/TaxReliefCalculator';
 import { calculateTaxRelief } from '@/utils';
 import type { Donation } from '@/types';
 

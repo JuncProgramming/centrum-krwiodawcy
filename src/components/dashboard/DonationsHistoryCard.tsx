@@ -1,7 +1,7 @@
 import { Plus } from 'lucide-react';
 import { DonationItem } from './DashboardDonationItem';
 import type { DonationsHistoryCardProps } from '@/types';
-import { BaseDashboardCard } from './BaseDashboardCard';
+import { BaseDashboardCard } from '@/components/dashboard/BaseDashboardCard';
 
 const DonationsHistoryCard = ({
   donations,

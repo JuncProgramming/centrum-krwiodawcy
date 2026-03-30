@@ -2,7 +2,8 @@ import {
   calculateTaxRelief,
   getDonationsWordForm,
   normalizeType,
-  calculateNextDonationDate
+  calculateNextDonationDate,
+  buildGoogleMapsLink
 } from '@/utils';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import type { Donation } from '@/types';
@@ -261,5 +262,23 @@ describe('getDonationsWordForm', () => {
     { count: 25, expected: 'donacji' }
   ])('should return $expected for number $count', ({ count, expected }) => {
     expect(getDonationsWordForm(count)).toBe(expected);
+  });
+});
+
+describe('buildGoogleMapsLink', () => {
+  it('should build directions url with destination_place_id when provided', () => {
+    const link = buildGoogleMapsLink([21.059879, 52.232741], 'place-id-123');
+
+    expect(link).toBe(
+      'https://www.google.com/maps/dir/?api=1&destination=52.232741%2C21.059879&destination_place_id=place-id-123&dir_action=navigate'
+    );
+  });
+
+  it('should build directions url without destination_place_id when not provided', () => {
+    const link = buildGoogleMapsLink([21.059879, 52.232741]);
+
+    expect(link).toBe(
+      'https://www.google.com/maps/dir/?api=1&destination=52.232741%2C21.059879&dir_action=navigate'
+    );
   });
 });
