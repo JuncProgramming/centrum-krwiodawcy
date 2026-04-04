@@ -125,10 +125,10 @@ function Dashboard() {
           <StatisticsCard donations={donations} />
 
           <TaxReliefCalculator donations={donations} />
+
+          <RCKiKMapCard />
         </div>
       </div>
-
-      <RCKiKMapCard />
 
       {isModalOpen && (
         <AddDonationModal

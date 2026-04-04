@@ -14,7 +14,7 @@ const DonationsHistoryCard = ({
     <BaseDashboardCard title='Historia donacji'>
       <div className='flex flex-col grow'>
         {donations.length === 0 ? (
-          <p className='text-zinc-500 text-sm mb-2'>Brak zapisanych donacji.</p>
+          <p className='text-zinc-600 text-sm'>Brak zapisanych donacji.</p>
         ) : (
           donations.map((donation, index) => (
             <div
