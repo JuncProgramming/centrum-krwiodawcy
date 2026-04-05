@@ -3,7 +3,7 @@ import { Header } from '@/components/Header';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { X } from 'lucide-react';
-import { controlFocusClass } from '@/constants';
+import { controlFocusClass, baseControlFocusClass } from '@/constants';
 
 export const Route = createRootRoute({
   component: RootLayout
@@ -31,7 +31,7 @@ function RootLayout() {
           <button
             onClick={closeToast}
             aria-label='Zamknij powiadomienie'
-            className={`absolute top-2 right-2 p-1 rounded-md text-zinc-400 hover:text-zinc-600 transition-colors cursor-pointer ${controlFocusClass}`}
+            className={`${baseControlFocusClass} absolute top-2 right-2 p-1 rounded-md text-zinc-400 hover:text-zinc-600 transition-colors cursor-pointer`}
           >
             <X size={16} aria-hidden='true' />
           </button>

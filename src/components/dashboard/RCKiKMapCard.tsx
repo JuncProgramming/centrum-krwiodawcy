@@ -11,7 +11,11 @@ import {
 } from '@/data/rckikLocations';
 import { mapPinIcon } from '@/lib/mapIcons';
 import { buildGoogleMapsLink } from '@/utils';
-import { controlFocusClass, textLinkFocusClass } from '@/constants';
+import {
+  controlFocusClass,
+  baseControlFocusClass,
+  textLinkFocusClass
+} from '@/constants';
 
 export function RCKiKMapCard() {
   const mapRef = useRef<L.Map | null>(null);
@@ -75,7 +79,7 @@ export function RCKiKMapCard() {
                         event.stopPropagation();
                         mapRef.current?.closePopup();
                       }}
-                      className={`absolute top-3 right-3         p-1 rounded-md text-zinc-600 hover:text-zinc-800 transition-colors cursor-pointer ${controlFocusClass}`}
+                      className={`${baseControlFocusClass} absolute top-3 right-3 p-1 rounded-md text-zinc-600 hover:text-zinc-800 transition-colors cursor-pointer`}
                     >
                       <X size={18} aria-hidden='true' />
                     </button>

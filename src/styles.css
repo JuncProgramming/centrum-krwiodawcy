@@ -193,7 +193,8 @@ input[type='number'] {
 @theme {
   --animate-upload-float: upload-float 1s infinite;
   @keyframes upload-float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0);
       animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
     }
