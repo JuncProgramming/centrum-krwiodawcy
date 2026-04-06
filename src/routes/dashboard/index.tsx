@@ -13,6 +13,8 @@ import BadgeGoalCard from '@/components/dashboard/BadgeGoalCard';
 import BadgesGalleryCard from '@/components/dashboard/BadgesGalleryCard';
 import { RCKiKMapCard } from '@/components/dashboard/RCKiKMapCard';
 import { useDonations } from '@/hooks/useDonations';
+import { waterfallAnimationClass } from '@/constants';
+import { getWaterfallAnimationDelay } from '@/utils';
 
 export const Route = createFileRoute('/dashboard/')({
   beforeLoad: async ({ location }) => {
@@ -81,7 +83,10 @@ function Dashboard() {
 
   return (
     <div className='max-w-7xl mx-auto space-y-8 pb-12'>
-      <h1 className='text-3xl font-bold text-zinc-800'>
+      <h1
+        className={`text-3xl font-bold text-zinc-800 ${waterfallAnimationClass}`}
+        style={{ animationDelay: getWaterfallAnimationDelay(0) }}
+      >
         Hej,{' '}
         <span className='text-red-600'>
           {user?.user_metadata.first_name || 'krwiodawco'}
@@ -91,42 +96,72 @@ function Dashboard() {
 
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
         <div className='lg:col-span-2 space-y-6'>
-          <StatusCard
-            nextDate={nextDate}
-            progress={progress}
-            daysRemaining={daysRemaining}
-            canDonate={canDonate}
-            targetDonationType={targetDonationType}
-            onTargetDonationTypeChange={setTargetDonationType}
-          />
+          <div
+            className={waterfallAnimationClass}
+            style={{ animationDelay: getWaterfallAnimationDelay(1) }}
+          >
+            <StatusCard
+              nextDate={nextDate}
+              progress={progress}
+              daysRemaining={daysRemaining}
+              canDonate={canDonate}
+              targetDonationType={targetDonationType}
+              onTargetDonationTypeChange={setTargetDonationType}
+            />
+          </div>
 
-          <DonationsHistoryCard
-            donations={donations}
-            onClick={() => setIsModalOpen(true)}
-            onDelete={(id) => setDonationToDelete(id)}
-            onUpload={handleUploadResults}
-            onViewResult={handleViewResult}
-          />
+          <div
+            className={waterfallAnimationClass}
+            style={{ animationDelay: getWaterfallAnimationDelay(2) }}
+          >
+            <DonationsHistoryCard
+              donations={donations}
+              onClick={() => setIsModalOpen(true)}
+              onDelete={(id) => setDonationToDelete(id)}
+              onUpload={handleUploadResults}
+              onViewResult={handleViewResult}
+            />
+          </div>
         </div>
 
         <div className='space-y-6'>
-          <BaseDashboardCard title='Odznaki'>
-            <BadgeGoalCard
-              donations={donations}
-              gender={user?.user_metadata?.gender}
-            />
-            <div className='my-4 border-t border-zinc-200'></div>
-            <BadgesGalleryCard
-              donations={donations}
-              gender={user?.user_metadata?.gender}
-            />
-          </BaseDashboardCard>
+          <div
+            className={waterfallAnimationClass}
+            style={{ animationDelay: getWaterfallAnimationDelay(3) }}
+          >
+            <BaseDashboardCard title='Odznaki'>
+              <BadgeGoalCard
+                donations={donations}
+                gender={user?.user_metadata?.gender}
+              />
+              <div className='my-4 border-t border-zinc-200'></div>
+              <BadgesGalleryCard
+                donations={donations}
+                gender={user?.user_metadata?.gender}
+              />
+            </BaseDashboardCard>
+          </div>
 
-          <StatisticsCard donations={donations} />
+          <div
+            className={waterfallAnimationClass}
+            style={{ animationDelay: getWaterfallAnimationDelay(4) }}
+          >
+            <StatisticsCard donations={donations} />
+          </div>
 
-          <TaxReliefCalculator donations={donations} />
+          <div
+            className={waterfallAnimationClass}
+            style={{ animationDelay: getWaterfallAnimationDelay(5) }}
+          >
+            <TaxReliefCalculator donations={donations} />
+          </div>
 
-          <RCKiKMapCard />
+          <div
+            className={waterfallAnimationClass}
+            style={{ animationDelay: getWaterfallAnimationDelay(6) }}
+          >
+            <RCKiKMapCard />
+          </div>
         </div>
       </div>
 

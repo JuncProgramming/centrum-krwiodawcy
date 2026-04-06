@@ -3,6 +3,8 @@ import { useAuth } from '@/hooks/useAuth';
 import { useState } from 'react';
 import { CircleCheck, CircleAlert } from 'lucide-react';
 import Spinner from '@/components/Spinner';
+import { waterfallAnimationClass } from '@/constants';
+import { getWaterfallAnimationDelay } from '@/utils';
 
 export const Route = createFileRoute('/update-password/')({
   component: UpdatePasswordPage
@@ -62,15 +64,22 @@ function UpdatePasswordPage() {
   if (!user) {
     return (
       <div className='w-xl max-w-md bg-white rounded-lg shadow-sm border border-zinc-200 p-8 flex flex-col items-center'>
-        <h1 className='text-3xl font-bold text-zinc-700 text-center mb-2'>
+        <h1
+          className={`text-3xl font-bold text-zinc-700 text-center mb-2 ${waterfallAnimationClass}`}
+          style={{ animationDelay: getWaterfallAnimationDelay(0) }}
+        >
           Link wygasł
         </h1>
-        <p className='text-zinc-600 text-center max-w-3xs'>
+        <p
+          className={`text-zinc-600 text-center max-w-3xs ${waterfallAnimationClass}`}
+          style={{ animationDelay: getWaterfallAnimationDelay(1) }}
+        >
           Aby uzyskać nowy link, przejdź do strony resetowania hasła.
         </p>
         <Link
           to='/forgot-password'
-          className='font-semibold text-sm mt-6 text-red-600 hover:text-red-700'
+          className={`font-semibold text-sm mt-6 text-red-600 hover:text-red-700 ${waterfallAnimationClass}`}
+          style={{ animationDelay: getWaterfallAnimationDelay(2) }}
         >
           Zresetuj swoje hasło
         </Link>
@@ -80,7 +89,10 @@ function UpdatePasswordPage() {
 
   return (
     <div className='bg-white rounded-lg shadow-sm border border-zinc-200 p-8 w-xl max-w-md'>
-      <div className='p-2'>
+      <div
+        className={`p-2 ${waterfallAnimationClass}`}
+        style={{ animationDelay: getWaterfallAnimationDelay(0) }}
+      >
         <h1 className='text-3xl font-bold text-zinc-700 text-center mb-2'>
           Ustaw nowe hasło
         </h1>
@@ -90,12 +102,19 @@ function UpdatePasswordPage() {
       </div>
 
       {message ? (
-        <div className='bg-green-50 text-green-600 px-4 py-5 rounded-md text-sm text-center flex flex-col items-center'>
+        <div
+          className={`bg-green-50 text-green-600 px-4 py-5 rounded-md text-sm text-center flex flex-col items-center ${waterfallAnimationClass}`}
+          style={{ animationDelay: getWaterfallAnimationDelay(1) }}
+        >
           <CircleCheck className='size-8 mb-3' />
           <span className='max-w-xs'>{message}</span>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className='space-y-4'>
+        <form
+          onSubmit={handleSubmit}
+          className={`space-y-4 ${waterfallAnimationClass}`}
+          style={{ animationDelay: getWaterfallAnimationDelay(1) }}
+        >
           <div>
             <label
               htmlFor='password'

@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { CircleAlert, CircleCheck } from 'lucide-react';
 import Spinner from '@/components/Spinner';
+import { waterfallAnimationClass } from '@/constants';
+import { getWaterfallAnimationDelay } from '@/utils';
 
 export const Route = createFileRoute('/register/')({
   component: RegisterPage
@@ -65,7 +67,10 @@ function RegisterPage() {
 
   return (
     <div className='bg-white rounded-lg shadow-sm border border-zinc-200 p-8 w-xl max-w-md'>
-      <div className='p-2'>
+      <div
+        className={`p-2 ${waterfallAnimationClass}`}
+        style={{ animationDelay: getWaterfallAnimationDelay(0) }}
+      >
         <h1 className='text-3xl font-bold text-zinc-700 text-center mb-2'>
           Rejestracja
         </h1>
@@ -75,13 +80,20 @@ function RegisterPage() {
       </div>
 
       {message ? (
-        <div className='bg-green-50 text-green-600 px-4 py-5 rounded-md text-sm text-center flex flex-col items-center'>
+        <div
+          className={`bg-green-50 text-green-600 px-4 py-5 rounded-md text-sm text-center flex flex-col items-center ${waterfallAnimationClass}`}
+          style={{ animationDelay: getWaterfallAnimationDelay(1) }}
+        >
           <CircleCheck className='size-8 mb-3' />
           <span className='max-w-xs'>{message}</span>
         </div>
       ) : (
         <>
-          <form onSubmit={handleSubmit} className='space-y-4'>
+          <form
+            onSubmit={handleSubmit}
+            className={`space-y-4 ${waterfallAnimationClass}`}
+            style={{ animationDelay: getWaterfallAnimationDelay(1) }}
+          >
             <div>
               <label
                 htmlFor='email'
@@ -201,7 +213,10 @@ function RegisterPage() {
             </button>
           </form>
 
-          <p className='mt-8 text-center text-sm text-zinc-600'>
+          <p
+            className={`mt-8 text-center text-sm text-zinc-600 ${waterfallAnimationClass}`}
+            style={{ animationDelay: getWaterfallAnimationDelay(2) }}
+          >
             Masz już konto?{' '}
             <Link
               to='/login'

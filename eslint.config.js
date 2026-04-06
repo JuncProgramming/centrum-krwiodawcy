@@ -6,7 +6,7 @@ import react from 'eslint-plugin-react';
 import prettier from 'eslint-config-prettier';
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', '**/routeTree.gen.ts'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx,js,jsx}'],

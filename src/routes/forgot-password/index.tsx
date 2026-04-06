@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { CircleCheck, CircleAlert } from 'lucide-react';
 import Spinner from '@/components/Spinner';
+import { waterfallAnimationClass } from '@/constants';
+import { getWaterfallAnimationDelay } from '@/utils';
 
 export const Route = createFileRoute('/forgot-password/')({
   component: ForgotPasswordPage
@@ -42,7 +44,10 @@ function ForgotPasswordPage() {
 
   return (
     <div className='bg-white rounded-lg w-xl max-w-md shadow-sm border border-zinc-200 p-8'>
-      <div className='p-2 flex flex-col items-center'>
+      <div
+        className={`p-2 flex flex-col items-center ${waterfallAnimationClass}`}
+        style={{ animationDelay: getWaterfallAnimationDelay(0) }}
+      >
         <h1 className='text-3xl font-bold text-zinc-700 text-center mb-2'>
           Resetowanie hasła
         </h1>
@@ -52,12 +57,19 @@ function ForgotPasswordPage() {
       </div>
 
       {message ? (
-        <div className='bg-green-50 text-green-600 px-4 py-5 rounded-md text-sm text-center flex flex-col items-center'>
+        <div
+          className={`bg-green-50 text-green-600 px-4 py-5 rounded-md text-sm text-center flex flex-col items-center ${waterfallAnimationClass}`}
+          style={{ animationDelay: getWaterfallAnimationDelay(1) }}
+        >
           <CircleCheck className='size-8 mb-3' />
           <span className='max-w-xs'>{message}</span>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className='space-y-4'>
+        <form
+          onSubmit={handleSubmit}
+          className={`space-y-4 ${waterfallAnimationClass}`}
+          style={{ animationDelay: getWaterfallAnimationDelay(1) }}
+        >
           <div>
             <label
               htmlFor='email'

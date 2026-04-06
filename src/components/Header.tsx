@@ -35,7 +35,7 @@ export function Header() {
 
   return (
     <>
-      <header className='w-full bg-white shadow-sm sticky top-0 z-50'>
+      <header className='w-full bg-white border-b border-zinc-200 sticky top-0 z-50'>
         <nav className='max-w-[2560px] mx-auto flex items-center justify-between px-4 py-3 md:px-6 md:py-4'>
           <Link
             to='/'

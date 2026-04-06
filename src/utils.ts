@@ -1,4 +1,8 @@
-import { TAX_RELIEF_PER_LITER, TYPE_VOLUME_MULTIPLIER } from '@/constants';
+import {
+  TAX_RELIEF_PER_LITER,
+  TYPE_VOLUME_MULTIPLIER,
+  WATERFALL_ANIMATION_DELAY
+} from '@/constants';
 import type { Donation } from '@/types';
 
 export const normalizeType = (type: string) => {
@@ -129,3 +133,6 @@ export const buildGoogleMapsLink = (
 
   return googleMapsLink;
 };
+
+export const getWaterfallAnimationDelay = (step: number) =>
+  `${step * WATERFALL_ANIMATION_DELAY}ms`;
