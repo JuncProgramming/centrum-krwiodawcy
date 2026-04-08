@@ -343,7 +343,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
                     onKeyDown={handleFilePickerKeyDown}
-                    className={`flex flex-col items-center bior justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${controlFocusClass} ${
+                    className={`group flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-colors focus-visible:outline-none focus-visible:border-zinc-500 ${
                       isDragging
                         ? 'border-red-500 bg-red-50'
                         : 'border-zinc-300 bg-zinc-50 hover:bg-zinc-100'
@@ -351,7 +351,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                   >
                     <div className='flex flex-col items-center justify-center pt-5 pb-6'>
                       <Upload
-                        className='w-8 h-8 mb-2 text-zinc-400'
+                        className='w-8 h-8 mb-2 text-zinc-400 group-focus-visible:animate-upload-float group-hover:animate-upload-float'
                         aria-hidden='true'
                       />
                       <p className='mb-2 text-sm text-zinc-500'>
