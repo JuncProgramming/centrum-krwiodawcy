@@ -39,6 +39,6 @@ export const textLinkFocusClass =
   'no-underline outline-2 outline-transparent rounded outline-offset-4 focus-visible:outline-zinc-800';
 
 export const controlFocusClass =
-  'no-underline outline-2 outline-transparent outline-offset-2 focus-visible:outline-zinc-800';
+  'relative z-0 no-underline outline-2 outline-transparent outline-offset-2 focus-visible:outline-zinc-800 focus-visible:z-20 focus-within:z-20';
 
 export const AUTHENTICATED_HOME_ROUTE = '/dashboard';

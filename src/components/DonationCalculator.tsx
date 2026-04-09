@@ -71,7 +71,7 @@ export function DonationCalculator() {
                   setLastDonationType('krew_pelna')
                 )
               }
-              className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors focus-within:z-10 ${controlFocusClass}`}
             >
               <input
                 type='radio'
@@ -95,7 +95,7 @@ export function DonationCalculator() {
               onKeyDown={(e) =>
                 handleOptionCardKeyDown(e, () => setLastDonationType('osocze'))
               }
-              className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors focus-within:z-10 ${controlFocusClass}`}
             >
               <input
                 type='radio'
@@ -121,7 +121,7 @@ export function DonationCalculator() {
                   setLastDonationType('plytki_krwi')
                 )
               }
-              className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors focus-within:z-10 ${controlFocusClass}`}
             >
               <input
                 type='radio'
@@ -155,7 +155,7 @@ export function DonationCalculator() {
                   setNextDonationType('krew_pelna')
                 )
               }
-              className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors focus-within:z-10 ${controlFocusClass}`}
             >
               <input
                 type='radio'
@@ -179,7 +179,7 @@ export function DonationCalculator() {
               onKeyDown={(e) =>
                 handleOptionCardKeyDown(e, () => setNextDonationType('osocze'))
               }
-              className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors focus-within:z-10 ${controlFocusClass}`}
             >
               <input
                 type='radio'
@@ -205,7 +205,7 @@ export function DonationCalculator() {
                   setNextDonationType('plytki_krwi')
                 )
               }
-              className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors focus-within:z-10 ${controlFocusClass}`}
             >
               <input
                 type='radio'
