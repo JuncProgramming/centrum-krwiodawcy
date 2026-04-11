@@ -1,12 +1,16 @@
-import { createFileRoute, useNavigate, Link } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { CircleAlert, CircleCheck } from 'lucide-react';
 import Spinner from '@/components/Spinner';
 import { waterfallAnimationClass } from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
+import { requireGuest } from '@/lib/routeGuards';
 
 export const Route = createFileRoute('/register/')({
+  beforeLoad: async () => {
+    await requireGuest();
+  },
   component: RegisterPage
 });
 
@@ -19,21 +23,7 @@ function RegisterPage() {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signUp, user, loading: authLoading } = useAuth();
-  const navigate = useNavigate();
-
-  if (authLoading) {
-    return (
-      <div className='flex items-center justify-center'>
-        <Spinner size='lg' />
-      </div>
-    );
-  }
-
-  if (user) {
-    navigate({ to: '/' });
-    return null;
-  }
+  const { signUp } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

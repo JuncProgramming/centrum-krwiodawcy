@@ -5,8 +5,12 @@ import { CircleCheck, CircleAlert } from 'lucide-react';
 import Spinner from '@/components/Spinner';
 import { waterfallAnimationClass } from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
+import { requireGuest } from '@/lib/routeGuards';
 
 export const Route = createFileRoute('/forgot-password/')({
+  beforeLoad: async () => {
+    await requireGuest();
+  },
   component: ForgotPasswordPage
 });
 

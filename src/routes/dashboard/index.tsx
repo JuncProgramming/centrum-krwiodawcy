@@ -1,4 +1,4 @@
-import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { supabase } from '@/supabaseClient';
 import Spinner from '@/components/Spinner';
 import { BaseDashboardCard } from '@/components/dashboard/BaseDashboardCard';
@@ -15,18 +15,11 @@ import { RCKiKMapCard } from '@/components/dashboard/RCKiKMapCard';
 import { useDonations } from '@/hooks/useDonations';
 import { waterfallAnimationClass } from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
+import { requireSession } from '@/lib/routeGuards';
 
 export const Route = createFileRoute('/dashboard/')({
-  beforeLoad: async ({ location }) => {
-    const {
-      data: { session }
-    } = await supabase.auth.getSession();
-    if (!session) {
-      throw redirect({
-        to: '/login',
-        search: { redirect: location.href }
-      });
-    }
+  beforeLoad: async () => {
+    const session = await requireSession();
     return { session };
   },
   pendingComponent: () => (

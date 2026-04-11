@@ -5,8 +5,12 @@ import { CircleAlert } from 'lucide-react';
 import Spinner from '@/components/Spinner';
 import { waterfallAnimationClass } from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
+import { requireGuest } from '@/lib/routeGuards';
 
 export const Route = createFileRoute('/login/')({
+  beforeLoad: async () => {
+    await requireGuest();
+  },
   component: LoginPage
 });
 
@@ -15,21 +19,8 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signIn, user, loading: authLoading } = useAuth();
+  const { signIn } = useAuth();
   const navigate = useNavigate();
-
-  if (authLoading) {
-    return (
-      <div className='flex items-center justify-center'>
-        <Spinner size='lg' />
-      </div>
-    );
-  }
-
-  if (user) {
-    navigate({ to: '/dashboard' });
-    return null;
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +34,8 @@ function LoginPage() {
 
     if (error) {
       setError('Nieprawidłowy email lub hasło');
+    } else {
+      await navigate({ to: '/dashboard' });
     }
   };
 
