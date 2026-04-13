@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { DonationCalculator } from '@/components/DonationCalculator';
-import { waterfallAnimationClass } from '@/constants';
+import { waterfallAnimationClass, textLinkFocusClass } from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
 
 export const Route = createFileRoute('/')({
@@ -39,7 +39,7 @@ function HomePage() {
           Jesteś tu pierwszy raz?{' '}
           <Link
             to='/faq'
-            className='font-semibold text-red-600 hover:underline'
+            className={`font-semibold text-red-600 hover:underline ${textLinkFocusClass}`}
           >
             Dowiedz się, jak zacząć oddawać krew (FAQ)
           </Link>

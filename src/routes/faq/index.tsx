@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import FaqCard from '@/components/FaqCard';
 import { faqData } from '@/data/faqData';
-import { waterfallAnimationClass } from '@/constants';
+import { waterfallAnimationClass, textLinkFocusClass } from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
 
 export const Route = createFileRoute('/faq/')({
@@ -46,7 +46,7 @@ function FaqPage() {
             href='https://www.gov.pl/web/nck'
             target='_blank'
             rel='noopener noreferrer'
-            className='font-semibold text-red-600 hover:underline'
+            className={`font-semibold text-red-600 hover:underline ${textLinkFocusClass}`}
           >
             Odwiedź portal Narodowego Centrum Krwi
           </a>
