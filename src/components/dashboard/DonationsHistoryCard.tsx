@@ -2,6 +2,7 @@ import { Plus } from 'lucide-react';
 import { DonationItem } from './DashboardDonationItem';
 import type { DonationsHistoryCardProps } from '@/types';
 import { BaseDashboardCard } from '@/components/dashboard/BaseDashboardCard';
+import { controlFocusClass } from '@/constants';
 
 const DonationsHistoryCard = ({
   donations,
@@ -32,7 +33,7 @@ const DonationsHistoryCard = ({
 
       <button
         onClick={onClick}
-        className='w-full mt-3 bg-red-600 text-white font-semibold py-2.5 px-6 rounded-md hover:bg-red-700 transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer'
+        className={`w-full mt-3 bg-red-600 text-white font-semibold py-2.5 px-6 rounded-md hover:bg-red-700 transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer ${controlFocusClass}`}
       >
         <Plus size={20} aria-hidden='true' />
         Dodaj donację

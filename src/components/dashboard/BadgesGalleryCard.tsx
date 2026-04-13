@@ -2,6 +2,7 @@ import { useState, useId } from 'react';
 import type { BadgesCardProps } from '@/types';
 import { Medal, ChevronDown } from 'lucide-react';
 import { useBadges } from '@/hooks/useBadges';
+import { controlFocusClass } from '@/constants';
 
 const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
   const { badges } = useBadges({ donations, gender });
@@ -14,7 +15,7 @@ const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
         <span className='font-medium text-zinc-700'>Galeria odznak</span>
         <button
           onClick={() => setIsGalleryOpen(!isGalleryOpen)}
-          className='p-2 rounded-md hover:bg-zinc-100 transition-colors cursor-pointer'
+          className={`p-2 rounded-md hover:bg-zinc-100 transition-colors cursor-pointer ${controlFocusClass}`}
           aria-label={isGalleryOpen ? 'Zwiń galerię' : 'Rozwiń galerię'}
           aria-expanded={isGalleryOpen}
           aria-controls={galleryId}

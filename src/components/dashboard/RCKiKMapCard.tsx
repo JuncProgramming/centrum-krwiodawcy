@@ -11,6 +11,7 @@ import {
 } from '@/data/rckikLocations';
 import { mapPinIcon } from '@/lib/mapIcons';
 import { buildGoogleMapsLink } from '@/utils';
+import { controlFocusClass, textLinkFocusClass } from '@/constants';
 
 export function RCKiKMapCard() {
   const mapRef = useRef<L.Map | null>(null);
@@ -58,6 +59,7 @@ export function RCKiKMapCard() {
                 key={location.placeId}
                 position={location.mapCoords}
                 icon={mapPinIcon}
+                keyboard
               >
                 <Popup
                   className='rckik-popup'
@@ -73,7 +75,7 @@ export function RCKiKMapCard() {
                         event.stopPropagation();
                         mapRef.current?.closePopup();
                       }}
-                      className='absolute top-0 right-0 p-4 rounded-md text-zinc-600 hover:text-zinc-800 transition-colors cursor-pointer'
+                      className={`absolute top-3 right-3         p-1 rounded-md text-zinc-600 hover:text-zinc-800 transition-colors cursor-pointer ${controlFocusClass}`}
                     >
                       <X size={18} aria-hidden='true' />
                     </button>
@@ -107,7 +109,7 @@ export function RCKiKMapCard() {
                           href={location.website}
                           target='_blank'
                           rel='noopener noreferrer'
-                          className='text-red-600 hover:text-red-700 hover:underline'
+                          className={`text-red-600 hover:text-red-700 hover:underline ${textLinkFocusClass}`}
                         >
                           {location.website
                             .replace('https://www.', '')
@@ -119,7 +121,7 @@ export function RCKiKMapCard() {
                       href={googleMapsLink}
                       target='_blank'
                       rel='noopener noreferrer'
-                      className='flex items-center font-semibold justify-center w-full bg-red-600 hover:bg-red-700 text-white! text-sm py-2.5 px-4 rounded-lg transition-colors no-underline'
+                      className={`flex items-center font-semibold justify-center w-full bg-red-600 hover:bg-red-700 text-white! text-sm py-2.5 px-4 rounded-lg transition-colors ${controlFocusClass}`}
                     >
                       Pokaż trasę w Google Maps
                     </a>

@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import type { StatusCardProps } from '@/types';
-import { STATUS_CARD_LABELS, DONATION_TYPES_ORDER } from '@/constants';
+import {
+  STATUS_CARD_LABELS,
+  DONATION_TYPES_ORDER,
+  controlFocusClass
+} from '@/constants';
 
 export default function StatusCard({
   daysRemaining,
@@ -43,7 +47,7 @@ export default function StatusCard({
               key={type}
               aria-pressed={targetDonationType === type}
               onClick={() => onTargetDonationTypeChange(type)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex-1 md:flex-none justify-center ${
+              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex-1 md:flex-none justify-center ${controlFocusClass} ${
                 targetDonationType === type
                   ? `bg-white shadow-sm ${
                       canDonate ? 'text-green-700' : 'text-zinc-800'

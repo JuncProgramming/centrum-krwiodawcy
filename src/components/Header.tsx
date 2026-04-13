@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { Menu, X, LogOut, User } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+import { textLinkFocusClass, controlFocusClass } from '@/constants';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -42,7 +43,7 @@ export function Header() {
         >
           <Link
             to='/'
-            className='flex items-center text-base md:text-lg font-bold text-red-600 hover:text-red-700 transition-colors'
+            className={`flex items-center text-base md:text-lg font-bold text-red-600 hover:text-red-700 transition-colors ${textLinkFocusClass}`}
           >
             <span className='whitespace-nowrap'>Centrum Krwiodawcy</span>
           </Link>
@@ -50,7 +51,7 @@ export function Header() {
           <div className='hidden md:flex items-center gap-3 lg:gap-4'>
             <Link
               to='/faq'
-              className='text-sm font-semibold text-zinc-600 hover:text-zinc-800 transition-colors whitespace-nowrap'
+              className={`text-sm font-semibold text-zinc-600 hover:text-zinc-800 transition-colors whitespace-nowrap ${textLinkFocusClass}`}
             >
               FAQ
             </Link>
@@ -59,14 +60,14 @@ export function Header() {
               <>
                 <Link
                   to='/dashboard'
-                  className='flex items-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2 px-4 rounded-md hover:bg-zinc-100 transition-colors whitespace-nowrap'
+                  className={`flex items-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2 px-4 rounded-md hover:bg-zinc-100 transition-colors whitespace-nowrap cursor-pointer ${controlFocusClass}`}
                 >
                   <User size={16} aria-hidden='true' />
                   {user.user_metadata?.first_name}
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className='flex items-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2 px-4 rounded-md hover:bg-zinc-100 transition-colors whitespace-nowrap cursor-pointer'
+                  className={`flex items-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2 px-4 rounded-md hover:bg-zinc-100 transition-colors whitespace-nowrap cursor-pointer ${controlFocusClass}`}
                 >
                   <LogOut size={16} aria-hidden='true' />
                   Wyloguj
@@ -76,14 +77,14 @@ export function Header() {
               <>
                 <Link
                   to='/login'
-                  className='text-sm font-semibold text-zinc-700 border border-zinc-300 py-2 px-4 rounded-md hover:bg-zinc-100 transition-colors whitespace-nowrap'
+                  className={`text-sm font-semibold text-zinc-700 border border-zinc-300 py-2 px-4 rounded-md hover:bg-zinc-100 transition-colors whitespace-nowrap ${controlFocusClass}`}
                 >
                   Zaloguj się
                 </Link>
 
                 <Link
                   to='/register'
-                  className='text-sm font-semibold text-white bg-zinc-700 py-2 px-4 rounded-md hover:bg-zinc-800 transition-colors whitespace-nowrap'
+                  className={`text-sm font-semibold text-white bg-zinc-700 py-2 px-4 rounded-md hover:bg-zinc-800 transition-colors whitespace-nowrap ${controlFocusClass}`}
                 >
                   Zarejestruj się
                 </Link>
@@ -93,7 +94,7 @@ export function Header() {
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className='md:hidden p-1.5 text-zinc-700 hover:bg-zinc-100 rounded-md transition-colors cursor-pointer'
+            className={`md:hidden p-1.5 text-zinc-700 hover:bg-zinc-100 rounded-md transition-colors cursor-pointer ${controlFocusClass}`}
             aria-label='Toggle menu'
             aria-expanded={isMobileMenuOpen}
             aria-controls='mobile-menu'
@@ -123,7 +124,7 @@ export function Header() {
               <Link
                 to='/faq'
                 onClick={() => setIsMobileMenuOpen(false)}
-                className='text-sm font-semibold text-zinc-600 hover:text-zinc-800 hover:bg-zinc-50 py-2.5 px-3 rounded-md transition-colors'
+                className={`text-sm font-semibold text-zinc-600 hover:text-zinc-800 hover:bg-zinc-50 py-2.5 px-3 rounded-md transition-colors ${controlFocusClass}`}
               >
                 FAQ
               </Link>
@@ -133,7 +134,7 @@ export function Header() {
                   <Link
                     to='/dashboard'
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className='flex items-center justify-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2.5 px-3 rounded-md hover:bg-zinc-100 transition-colors mt-2'
+                    className={`flex items-center justify-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2.5 px-3 rounded-md hover:bg-zinc-100 transition-colors mt-2 ${controlFocusClass}`}
                   >
                     <User size={16} aria-hidden='true' />
                     {user.user_metadata?.first_name}
@@ -143,7 +144,7 @@ export function Header() {
                       handleSignOut();
                       setIsMobileMenuOpen(false);
                     }}
-                    className='flex items-center justify-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2.5 px-3 rounded-md hover:bg-zinc-100 transition-colors mt-2 cursor-pointer'
+                    className={`flex items-center justify-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2.5 px-3 rounded-md hover:bg-zinc-100 transition-colors mt-2 cursor-pointer ${controlFocusClass}`}
                   >
                     <LogOut size={16} aria-hidden='true' />
                     Wyloguj
@@ -154,7 +155,7 @@ export function Header() {
                   <Link
                     to='/login'
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className='text-sm font-semibold text-zinc-700 border border-zinc-300 py-2.5 px-3 rounded-md hover:bg-zinc-100 transition-colors text-center mt-2'
+                    className={`text-sm font-semibold text-zinc-700 border border-zinc-300 py-2.5 px-3 rounded-md hover:bg-zinc-100 transition-colors text-center mt-2 ${controlFocusClass}`}
                   >
                     Zaloguj się
                   </Link>
@@ -162,7 +163,7 @@ export function Header() {
                   <Link
                     to='/register'
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className='text-sm font-semibold text-white bg-zinc-700 py-2.5 px-3 rounded-md hover:bg-zinc-800 transition-colors text-center mt-2'
+                    className={`text-sm font-semibold text-white bg-zinc-700 py-2.5 px-3 rounded-md hover:bg-zinc-800 transition-colors text-center mt-2 ${controlFocusClass}`}
                   >
                     Zarejestruj się
                   </Link>

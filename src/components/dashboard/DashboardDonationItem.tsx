@@ -1,7 +1,7 @@
 import { Paperclip, Trash2, Calendar, MapPin, FileText } from 'lucide-react';
 import { type Donation } from '@/types';
 import { useRef } from 'react';
-import { DONATION_LABELS } from '@/constants';
+import { DONATION_LABELS, controlFocusClass } from '@/constants';
 
 export function DonationItem({
   donation,
@@ -52,7 +52,7 @@ export function DonationItem({
         {donation.results_url ? (
           <button
             onClick={() => onViewResult(donation.results_url!)}
-            className='p-2 border cursor-pointer border-blue-200 rounded-md text-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-colors'
+            className={`p-2 border cursor-pointer border-blue-200 rounded-md text-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-colors ${controlFocusClass}`}
             title='Zobacz wyniki badań'
             aria-label='Zobacz wyniki badań'
           >
@@ -71,7 +71,7 @@ export function DonationItem({
             />
             <button
               onClick={() => fileInputRef.current?.click()}
-              className='p-2 border cursor-pointer border-zinc-200 rounded-md text-zinc-500 hover:text-zinc-600 hover:bg-zinc-50 transition-colors'
+              className={`p-2 border cursor-pointer border-zinc-200 rounded-md text-zinc-500 hover:text-zinc-600 hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
               title='Dodaj wyniki badań'
               aria-label='Dodaj wyniki badań'
             >
@@ -81,7 +81,7 @@ export function DonationItem({
         )}
         <button
           onClick={() => onDelete(donation.id)}
-          className='p-2 border cursor-pointer border-zinc-200 rounded-md text-zinc-500 hover:text-red-500 hover:bg-red-50 hover:border-red-200 transition-colors'
+          className={`p-2 border cursor-pointer border-zinc-200 rounded-md text-zinc-500 hover:text-red-500 hover:bg-red-50 hover:border-red-200 transition-colors ${controlFocusClass}`}
           title='Usuń donację'
           aria-label='Usuń donację'
         >
