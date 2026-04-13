@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { CircleCheck, CircleAlert } from 'lucide-react';
 import Spinner from '@/components/Spinner';
-import { waterfallAnimationClass } from '@/constants';
+import { waterfallAnimationClass, controlFocusClass } from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
 import { requireGuest } from '@/lib/routeGuards';
 
@@ -87,7 +87,7 @@ function ForgotPasswordPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className='w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent'
+              className={`w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
               placeholder='twoj@email.pl'
             />
           </div>
@@ -102,7 +102,7 @@ function ForgotPasswordPage() {
           <button
             type='submit'
             disabled={loading}
-            className='w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer'
+            className={`w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer ${controlFocusClass}`}
           >
             {loading && <Spinner size='sm' />}
             {loading ? 'Wysyłanie linku...' : 'Wyślij link'}

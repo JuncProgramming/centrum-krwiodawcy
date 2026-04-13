@@ -3,7 +3,11 @@ import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { CircleAlert, CircleCheck } from 'lucide-react';
 import Spinner from '@/components/Spinner';
-import { waterfallAnimationClass } from '@/constants';
+import {
+  waterfallAnimationClass,
+  textLinkFocusClass,
+  controlFocusClass
+} from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
 import { requireGuest } from '@/lib/routeGuards';
 
@@ -55,6 +59,16 @@ function RegisterPage() {
     }
   };
 
+  const handleGenderCardKeyDown = (
+    e: React.KeyboardEvent,
+    newGender: string
+  ) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setGender(newGender);
+    }
+  };
+
   return (
     <div className='bg-white rounded-lg shadow-sm border border-zinc-200 p-8 w-xl max-w-md'>
       <header
@@ -97,7 +111,7 @@ function RegisterPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className='w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent'
+                className={`w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
                 placeholder='twoj@email.pl'
               />
             </div>
@@ -115,7 +129,7 @@ function RegisterPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className='w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent'
+                className={`w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
                 placeholder='Minimum 6 znaków'
               />
             </div>
@@ -133,7 +147,7 @@ function RegisterPage() {
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className='w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent'
+                className={`w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
                 placeholder='Powtórz hasło'
               />
             </div>
@@ -151,7 +165,7 @@ function RegisterPage() {
                 required
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className='w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent'
+                className={`w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
                 placeholder='Twoje imię'
               />
             </div>
@@ -161,24 +175,38 @@ function RegisterPage() {
                 Płeć
               </label>
               <div className='space-y-2'>
-                <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
+                <label
+                  tabIndex={0}
+                  role='radio'
+                  aria-checked={gender === 'male'}
+                  onKeyDown={(e) => handleGenderCardKeyDown(e, 'male')}
+                  className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+                >
                   <input
                     type='radio'
                     name='gender'
                     value='male'
                     checked={gender === 'male'}
                     onChange={(e) => setGender(e.target.value)}
+                    tabIndex={-1}
                     className='w-4 h-4 text-red-600 focus:ring-red-500'
                   />
                   <span className='ml-3 text-zinc-700'>Mężczyzna</span>
                 </label>
-                <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
+                <label
+                  tabIndex={0}
+                  role='radio'
+                  aria-checked={gender === 'female'}
+                  onKeyDown={(e) => handleGenderCardKeyDown(e, 'female')}
+                  className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+                >
                   <input
                     type='radio'
                     name='gender'
                     value='female'
                     checked={gender === 'female'}
                     onChange={(e) => setGender(e.target.value)}
+                    tabIndex={-1}
                     className='w-4 h-4 text-red-600 focus:ring-red-500'
                   />
                   <span className='ml-3 text-zinc-700'>Kobieta</span>
@@ -196,7 +224,7 @@ function RegisterPage() {
             <button
               type='submit'
               disabled={loading}
-              className='w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer'
+              className={`w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer ${controlFocusClass}`}
             >
               {loading && <Spinner size='sm' />}
               {loading ? 'Rejestrowanie...' : 'Zarejestruj się'}
@@ -210,7 +238,7 @@ function RegisterPage() {
             Masz już konto?{' '}
             <Link
               to='/login'
-              className='font-semibold text-red-600 hover:text-red-700'
+              className={`font-semibold text-red-600 hover:text-red-700 ${textLinkFocusClass}`}
             >
               Zaloguj się
             </Link>

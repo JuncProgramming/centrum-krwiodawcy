@@ -3,7 +3,11 @@ import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { CircleAlert } from 'lucide-react';
 import Spinner from '@/components/Spinner';
-import { waterfallAnimationClass } from '@/constants';
+import {
+  waterfallAnimationClass,
+  textLinkFocusClass,
+  controlFocusClass
+} from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
 import { requireGuest } from '@/lib/routeGuards';
 
@@ -71,7 +75,7 @@ function LoginPage() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className='w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent'
+            className={`w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
             placeholder='twoj@email.pl'
           />
         </div>
@@ -89,7 +93,7 @@ function LoginPage() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className='w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent'
+            className={`w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
             placeholder='Twoje hasło'
           />
         </div>
@@ -104,7 +108,7 @@ function LoginPage() {
         <button
           type='submit'
           disabled={loading}
-          className='w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer'
+          className={`w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer ${controlFocusClass}`}
         >
           {loading && <Spinner size='sm' />}
           {loading ? 'Logowanie...' : 'Zaloguj się'}
@@ -118,7 +122,7 @@ function LoginPage() {
         Nie pamiętasz hasła?{' '}
         <Link
           to='/forgot-password'
-          className='font-semibold text-red-600 hover:text-red-700'
+          className={`font-semibold text-red-600 hover:text-red-700 ${textLinkFocusClass}`}
         >
           Zresetuj hasło
         </Link>

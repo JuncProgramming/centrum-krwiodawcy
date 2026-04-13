@@ -3,7 +3,11 @@ import { useAuth } from '@/hooks/useAuth';
 import { useState } from 'react';
 import { CircleCheck, CircleAlert } from 'lucide-react';
 import Spinner from '@/components/Spinner';
-import { waterfallAnimationClass } from '@/constants';
+import {
+  waterfallAnimationClass,
+  textLinkFocusClass,
+  controlFocusClass
+} from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
 
 export const Route = createFileRoute('/update-password/')({
@@ -78,7 +82,7 @@ function UpdatePasswordPage() {
         </p>
         <Link
           to='/forgot-password'
-          className={`font-semibold text-sm mt-6 text-red-600 hover:text-red-700 ${waterfallAnimationClass}`}
+          className={`font-semibold text-sm mt-6 text-red-600 hover:text-red-700 ${textLinkFocusClass} ${waterfallAnimationClass}`}
           style={{ animationDelay: getWaterfallAnimationDelay(2) }}
         >
           Zresetuj swoje hasło
@@ -128,7 +132,7 @@ function UpdatePasswordPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className='w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent'
+              className={`w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
               placeholder='Minimum 6 znaków'
             />
           </div>
@@ -146,7 +150,7 @@ function UpdatePasswordPage() {
               required
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className='w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent'
+              className={`w-full px-3 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
               placeholder='Powtórz nowe hasło'
             />
           </div>
@@ -161,7 +165,7 @@ function UpdatePasswordPage() {
           <button
             type='submit'
             disabled={loading}
-            className='w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer'
+            className={`w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer ${controlFocusClass}`}
           >
             {loading && <Spinner size='sm' />}
             {loading ? 'Zapisywanie hasła...' : 'Zapisz nowe hasło'}
