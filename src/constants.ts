@@ -35,4 +35,10 @@ export const AUTH_LOADING_SPINNER_DELAY = 100; // ms
 export const waterfallAnimationClass =
   'opacity-0 motion-safe:animate-[waterfall-enter_500ms_ease-out_both] motion-reduce:animate-none motion-reduce:opacity-100 motion-reduce:translate-y-0';
 
+export const textLinkFocusClass =
+  'no-underline outline-2 outline-transparent rounded outline-offset-4 focus-visible:outline-zinc-800';
+
+export const controlFocusClass =
+  'no-underline outline-2 outline-transparent outline-offset-2 focus-visible:outline-zinc-800';
+
 export const AUTHENTICATED_HOME_ROUTE = '/dashboard';

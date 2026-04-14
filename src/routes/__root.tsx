@@ -18,7 +18,7 @@ function RootLayout() {
       <ToastContainer
         position='bottom-right'
         pauseOnHover={false}
-        toastClassName='!rounded-md !shadow-sm !border !border-zinc-200 !p-4 !pr-10 !bg-white !relative !flex !items-center !gap-3 !min-h-[60px]'
+        toastClassName='!rounded-md !shadow-sm !border !border-zinc-200 !p-4 !pr-10 !bg-white !relative !flex !items-center !gap-3 !min-h-[60px] !overflow-visible !outline-2 !outline-transparent !outline-offset-4 focus-within:!outline-zinc-800'
         className='text-sm! font-medium! text-zinc-700! m-0! p-0!'
         style={
           {

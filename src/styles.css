@@ -88,12 +88,22 @@ input[type='number'] {
   color: #52525b !important;
   border-bottom: 1px solid #e4e4e7 !important;
   font-weight: 600 !important;
+  position: relative;
+  outline: 2px solid transparent !important;
+  outline-offset: 0 !important;
   transition:
     background-color 0.15s ease,
     color 0.15s ease !important;
 }
 
+.leaflet-control-zoom a:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .leaflet-control-zoom a:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   border-bottom: none !important;
 }
 
@@ -101,6 +111,30 @@ input[type='number'] {
 .leaflet-control-zoom a:focus {
   background: #f4f4f5 !important;
   color: #27272a !important;
+}
+
+.leaflet-control-zoom a:not(.leaflet-disabled):focus-visible {
+  z-index: 1;
+}
+
+.leaflet-control-zoom a:not(.leaflet-disabled):focus-visible::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid #27272a;
+  border-radius: 0;
+  pointer-events: none;
+}
+
+.leaflet-control-zoom
+  a:not(.leaflet-disabled):first-child:focus-visible::after {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.leaflet-control-zoom a:not(.leaflet-disabled):last-child:focus-visible::after {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .leaflet-control-zoom a.leaflet-disabled {

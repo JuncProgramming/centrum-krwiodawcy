@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import { textLinkFocusClass } from '@/constants';
 
 export const mapPinIcon = new L.Icon({
   iconUrl:
@@ -18,5 +19,6 @@ export const mapPinIcon = new L.Icon({
   `),
   iconSize: [36, 54],
   iconAnchor: [18, 54],
-  popupAnchor: [0, -54]
+  popupAnchor: [0, -54],
+  className: textLinkFocusClass
 });
