@@ -96,7 +96,7 @@ function LoginPage() {
 
         {error && (
           <div className='bg-red-50 text-red-600 px-4 py-3 rounded-md text-sm flex items-center gap-2'>
-            <CircleAlert className='size-5 shrink-0' />
+            <CircleAlert className='size-5 shrink-0' aria-hidden='true' />
             <span>{error}</span>
           </div>
         )}

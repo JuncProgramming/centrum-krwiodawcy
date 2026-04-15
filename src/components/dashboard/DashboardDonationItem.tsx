@@ -37,7 +37,7 @@ export function DonationItem({
           )}
         </div>
         <div className='flex items-center gap-1.5 text-sm text-zinc-600 mb-1'>
-          <Calendar size={14} className='shrink-0' />
+          <Calendar size={14} className='shrink-0' aria-hidden='true' />
           <time dateTime={donation.date} className='mt-0.5'>
             {new Date(donation.date).toLocaleDateString('pl-PL')}
           </time>
@@ -73,6 +73,7 @@ export function DonationItem({
               onClick={() => fileInputRef.current?.click()}
               className='p-2 border cursor-pointer border-zinc-200 rounded-md text-zinc-500 hover:text-zinc-600 hover:bg-zinc-50 transition-colors'
               title='Dodaj wyniki badań'
+              aria-label='Dodaj wyniki badań'
             >
               <Paperclip size={20} aria-hidden='true' />
             </button>

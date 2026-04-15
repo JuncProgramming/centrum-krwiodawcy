@@ -19,7 +19,10 @@ const BadgeGoalCard = ({ donations, gender }: BadgesCardProps) => {
       <div className='flex flex-col gap-4'>
         <div className='flex items-center gap-3'>
           <div className={`p-2 rounded-full ${currentBadge.colors.bg}`}>
-            <Medal className={`w-6 h-6 ${currentBadge.colors.text}`} />
+            <Medal
+              className={`w-6 h-6 ${currentBadge.colors.text}`}
+              aria-hidden='true'
+            />
           </div>
           <div>
             <p className='text-sm font-medium text-zinc-500'>Osiągnięto cel</p>
@@ -39,7 +42,10 @@ const BadgeGoalCard = ({ donations, gender }: BadgesCardProps) => {
     <div className='flex flex-col gap-4 mt-2'>
       <div className='flex items-center gap-3'>
         <div className={`p-2 rounded-full ${targetBadge.colors.bg}`}>
-          <Medal className={`w-6 h-6 ${targetBadge.colors.text}`} />
+          <Medal
+            className={`w-6 h-6 ${targetBadge.colors.text}`}
+            aria-hidden='true'
+          />
         </div>
         <div>
           <p className='text-sm font-medium text-zinc-500'>Następny cel</p>

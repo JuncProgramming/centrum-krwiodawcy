@@ -24,6 +24,7 @@ const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
               isGalleryOpen ? 'rotate-180' : ''
             }`}
             size={20}
+            aria-hidden='true'
           />
         </button>
       </div>

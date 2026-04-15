@@ -106,7 +106,7 @@ function UpdatePasswordPage() {
           className={`bg-green-50 text-green-600 px-4 py-5 rounded-md text-sm text-center flex flex-col items-center ${waterfallAnimationClass}`}
           style={{ animationDelay: getWaterfallAnimationDelay(1) }}
         >
-          <CircleCheck className='size-8 mb-3' />
+          <CircleCheck className='size-8 mb-3' aria-hidden='true' />
           <span className='max-w-xs'>{message}</span>
         </div>
       ) : (
@@ -153,7 +153,7 @@ function UpdatePasswordPage() {
 
           {error && (
             <div className='bg-red-50 text-red-600 px-4 py-3 rounded-md text-sm flex items-center gap-2'>
-              <CircleAlert className='size-5 shrink-0' />
+              <CircleAlert className='size-5 shrink-0' aria-hidden='true' />
               <span>{error}</span>
             </div>
           )}

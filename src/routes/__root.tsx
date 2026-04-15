@@ -29,9 +29,10 @@ function RootLayout() {
         closeButton={({ closeToast }) => (
           <button
             onClick={closeToast}
+            aria-label='Zamknij powiadomienie'
             className='absolute top-2 right-2 p-1 rounded-md text-zinc-400 hover:text-zinc-600 transition-colors cursor-pointer'
           >
-            <X size={16} />
+            <X size={16} aria-hidden='true' />
           </button>
         )}
       />
