@@ -21,16 +21,13 @@ describe('FaqCard', () => {
     expect(screen.getByText(testAnswerText)).toBeInTheDocument();
   });
 
-  it('should expand the card structure and update the button aria-label when clicked', async () => {
+  it('should expand the card structure and update the button expanded state when clicked', async () => {
     const user = userEvent.setup();
 
     render(<FaqCard question={testQuestionText}>{testAnswerContent}</FaqCard>);
 
     const button = screen.getByRole('button');
-    expect(button).toHaveAttribute(
-      'aria-label',
-      expect.stringMatching(/rozwiń/i)
-    );
+    expect(button).toHaveAttribute('aria-expanded', 'false');
     expect(button).toBeInTheDocument();
     expect(button).toBeVisible();
 
@@ -39,24 +36,18 @@ describe('FaqCard', () => {
 
     await user.click(button);
 
-    expect(button).toHaveAttribute(
-      'aria-label',
-      expect.stringMatching(/zwiń/i)
-    );
+    expect(button).toHaveAttribute('aria-expanded', 'true');
 
     expect(accordion).toHaveClass('grid-rows-[1fr]');
   });
 
-  it('should collapse the card structure back when clicked twice and update the button aria-label accordingly', async () => {
+  it('should collapse the card structure back when clicked twice and update the button expanded state accordingly', async () => {
     const user = userEvent.setup();
 
     render(<FaqCard question={testQuestionText}>{testAnswerContent}</FaqCard>);
 
     const button = screen.getByRole('button');
-    expect(button).toHaveAttribute(
-      'aria-label',
-      expect.stringMatching(/rozwiń/i)
-    );
+    expect(button).toHaveAttribute('aria-expanded', 'false');
     expect(button).toBeInTheDocument();
     expect(button).toBeVisible();
 
@@ -65,19 +56,13 @@ describe('FaqCard', () => {
 
     await user.click(button);
 
-    expect(button).toHaveAttribute(
-      'aria-label',
-      expect.stringMatching(/zwiń/i)
-    );
+    expect(button).toHaveAttribute('aria-expanded', 'true');
 
     expect(accordion).toHaveClass('grid-rows-[1fr]');
 
     await user.click(button);
 
-    expect(button).toHaveAttribute(
-      'aria-label',
-      expect.stringMatching(/rozwiń/i)
-    );
+    expect(button).toHaveAttribute('aria-expanded', 'false');
 
     expect(accordion).toHaveClass('grid-rows-[0fr]');
   });

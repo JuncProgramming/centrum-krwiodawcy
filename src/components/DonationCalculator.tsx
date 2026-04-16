@@ -47,10 +47,10 @@ export function DonationCalculator() {
           />
         </div>
 
-        <div className='flex flex-col'>
-          <label className='mb-2 font-medium text-zinc-600'>
+        <fieldset className='flex flex-col'>
+          <legend className='mb-2 font-medium text-zinc-600'>
             Co oddano (ostatnio):
-          </label>
+          </legend>
           <div className='space-y-2'>
             <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
               <input
@@ -98,12 +98,12 @@ export function DonationCalculator() {
               </span>
             </label>
           </div>
-        </div>
+        </fieldset>
 
-        <div className='flex flex-col'>
-          <label className='mb-2 font-medium text-zinc-600'>
+        <fieldset className='flex flex-col'>
+          <legend className='mb-2 font-medium text-zinc-600'>
             Co chcesz oddać (teraz):
-          </label>
+          </legend>
           <div className='space-y-2'>
             <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
               <input
@@ -151,7 +151,7 @@ export function DonationCalculator() {
               </span>
             </label>
           </div>
-        </div>
+        </fieldset>
       </div>
 
       <button
@@ -163,7 +163,10 @@ export function DonationCalculator() {
 
       <div className='space-y-3 mt-3'>
         {nextDonationDate && calculatedNextDonationType && (
-          <div className='text-center bg-green-100 p-4 rounded-md'>
+          <div
+            aria-live='polite'
+            className='text-center bg-green-100 p-4 rounded-md'
+          >
             <p className='font-medium text-green-800'>
               Możesz znów oddać{' '}
               {calculatedNextDonationType === 'krew_pelna'
@@ -173,9 +176,14 @@ export function DonationCalculator() {
                   : 'płytki krwi'}{' '}
               od:
             </p>
-            <p className='text-2xl font-bold text-green-900'>
-              {nextDonationDate.toLocaleDateString('pl-PL')}
-            </p>
+            <output className='block'>
+              <time
+                dateTime={nextDonationDate.toISOString()}
+                className='text-2xl font-bold text-green-900'
+              >
+                {nextDonationDate.toLocaleDateString('pl-PL')}
+              </time>
+            </output>
           </div>
         )}
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import type { BadgesCardProps } from '@/types';
 import { Medal, ChevronDown } from 'lucide-react';
 import { useBadges } from '@/hooks/useBadges';
@@ -6,6 +6,7 @@ import { useBadges } from '@/hooks/useBadges';
 const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
   const { badges } = useBadges({ donations, gender });
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const galleryId = useId();
 
   return (
     <div className='w-full'>
@@ -15,6 +16,8 @@ const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
           onClick={() => setIsGalleryOpen(!isGalleryOpen)}
           className='p-2 rounded-md hover:bg-zinc-100 transition-colors cursor-pointer'
           aria-label={isGalleryOpen ? 'Zwiń galerię' : 'Rozwiń galerię'}
+          aria-expanded={isGalleryOpen}
+          aria-controls={galleryId}
         >
           <ChevronDown
             className={`shrink-0 transition-transform duration-200 ${
@@ -26,6 +29,7 @@ const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
       </div>
 
       <div
+        id={galleryId}
         className={`grid transition-all duration-300 ease-in-out ${
           isGalleryOpen
             ? 'grid-rows-[1fr] opacity-100'
@@ -33,12 +37,12 @@ const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
         }`}
       >
         <div className='overflow-hidden'>
-          <div className='grid grid-cols-2 md:grid-cols-3 gap-2 pt-4'>
+          <ul className='grid grid-cols-2 md:grid-cols-3 gap-2 pt-4'>
             {badges.map((badge) => {
               const isUnlocked = badge.isUnlocked;
 
               return (
-                <div
+                <li
                   key={badge.id}
                   className={`
                     relative flex flex-col items-center justify-center p-3 rounded-lg border text-center transition-all
@@ -50,6 +54,7 @@ const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
                   >
                     <Medal
                       className={`w-6 h-6 ${isUnlocked ? badge.colors.text : 'text-zinc-500'}`}
+                      aria-hidden='true'
                     />
                   </div>
 
@@ -63,10 +68,10 @@ const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
                       {badge.threshold} litrów
                     </p>
                   </div>
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
       </div>
     </div>

@@ -19,9 +19,7 @@ export default function StatusCard({
   return (
     <section
       className={`p-6 rounded-lg border shadow-sm transition-all grid duration-300 ease-in-out ${
-        canDonate
-          ? 'bg-green-50 border-green-200 grid-rows-[1fr]'
-          : 'bg-white border-zinc-200 grid-rows-[0fr]'
+        canDonate ? 'bg-green-50 border-green-200' : 'bg-white border-zinc-200'
       }`}
     >
       <div className='flex flex-col-reverse md:flex-row md:items-center justify-between mb-1 gap-4'>
@@ -34,6 +32,8 @@ export default function StatusCard({
         </h2>
 
         <div
+          role='group'
+          aria-label='Wybierz rodzaj donacji'
           className={`flex p-1 rounded-lg w-full md:w-auto ${
             canDonate ? 'bg-green-900/5' : 'bg-zinc-100'
           }`}
@@ -41,6 +41,7 @@ export default function StatusCard({
           {DONATION_TYPES_ORDER.map((type) => (
             <button
               key={type}
+              aria-pressed={targetDonationType === type}
               onClick={() => onTargetDonationTypeChange(type)}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex-1 md:flex-none justify-center ${
                 targetDonationType === type
@@ -117,6 +118,10 @@ export default function StatusCard({
           }`}
         >
           <div
+            role='progressbar'
+            aria-valuenow={canDonate ? 100 : progress}
+            aria-valuemin={0}
+            aria-valuemax={100}
             className={`h-full rounded-full transition-[width] duration-600 ease-out ${
               canDonate ? 'bg-green-500' : 'bg-red-600'
             }`}
@@ -133,7 +138,7 @@ export default function StatusCard({
         >
           <div className='overflow-hidden'>
             <p className='text-sm text-zinc-500 mt-6 text-right'>
-              Przewidywana data: <span className='font-medium'>{nextDate}</span>
+              Przewidywana data: <time className='font-medium'>{nextDate}</time>
             </p>
           </div>
         </div>

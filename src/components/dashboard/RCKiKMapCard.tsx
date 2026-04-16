@@ -43,7 +43,7 @@ export function RCKiKMapCard() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
           />
-          {rckikLocations.map((location, index) => {
+          {rckikLocations.map((location) => {
             const coordinates: [number, number] = [
               location.mapCoords[1],
               location.mapCoords[0]
@@ -55,7 +55,7 @@ export function RCKiKMapCard() {
 
             return (
               <Marker
-                key={index}
+                key={location.placeId}
                 position={location.mapCoords}
                 icon={mapPinIcon}
               >
@@ -67,6 +67,7 @@ export function RCKiKMapCard() {
                   <div className='relative min-w-60'>
                     <button
                       type='button'
+                      aria-label='Zamknij szczegóły'
                       onClick={(event) => {
                         event.preventDefault();
                         event.stopPropagation();
@@ -74,25 +75,34 @@ export function RCKiKMapCard() {
                       }}
                       className='absolute top-0 right-0 p-4 rounded-md text-zinc-600 hover:text-zinc-800 transition-colors cursor-pointer'
                     >
-                      <X size={18} />
+                      <X size={18} aria-hidden='true' />
                     </button>
                     <h4 className='font-semibold text-zinc-800 text-base leading-tight mb-3 pr-12'>
                       {location.name}
                     </h4>
-                    <div className='pr-12'>
+                    <address className='pr-12'>
                       <div className='flex items-start gap-2.5 text-zinc-600 text-sm mb-1.5'>
                         <MapPin
                           className='mt-0.5 shrink-0 text-zinc-400'
                           size={15}
+                          aria-hidden='true'
                         />
                         <span>{location.address}</span>
                       </div>
                       <div className='flex items-center gap-2.5 text-zinc-600 text-sm mb-1.5'>
-                        <Phone className='shrink-0 text-zinc-400' size={15} />
+                        <Phone
+                          className='shrink-0 text-zinc-400'
+                          size={15}
+                          aria-hidden='true'
+                        />
                         <span>{location.phone}</span>
                       </div>
                       <div className='flex items-center gap-2.5 text-zinc-600 text-sm mb-4'>
-                        <Globe className='shrink-0 text-zinc-400' size={15} />
+                        <Globe
+                          className='shrink-0 text-zinc-400'
+                          size={15}
+                          aria-hidden='true'
+                        />
                         <a
                           href={location.website}
                           target='_blank'
@@ -104,7 +114,7 @@ export function RCKiKMapCard() {
                             .replace('https://', '')}
                         </a>
                       </div>
-                    </div>
+                    </address>
                     <a
                       href={googleMapsLink}
                       target='_blank'

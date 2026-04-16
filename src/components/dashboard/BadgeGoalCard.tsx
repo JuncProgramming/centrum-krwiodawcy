@@ -50,7 +50,13 @@ const BadgeGoalCard = ({ donations, gender }: BadgesCardProps) => {
       </div>
 
       <div className='space-y-2'>
-        <div className='w-full bg-zinc-100 rounded-full h-4 overflow-hidden'>
+        <div
+          role='progressbar'
+          aria-valuenow={progress}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          className='w-full bg-zinc-100 rounded-full h-4 overflow-hidden'
+        >
           <div
             className={`h-full rounded-full transition-all duration-1000 ease-out ${targetBadge.colors.progress}`}
             style={{ width: `${progress}%` }}

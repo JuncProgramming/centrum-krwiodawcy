@@ -18,10 +18,16 @@ export function ConfirmModal({
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !isLoading) onClose();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+
     return () => {
       document.body.style.overflow = 'unset';
+      document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [onClose, isLoading]);
 
   const handleConfirm = async () => {
     setIsLoading(true);
@@ -34,7 +40,13 @@ export function ConfirmModal({
   };
 
   return (
-    <div className='fixed inset-0 z-50 overflow-y-auto'>
+    <div
+      role='dialog'
+      aria-modal='true'
+      aria-labelledby='confirm-modal-title'
+      aria-describedby='confirm-modal-desc'
+      className='fixed inset-0 z-50 overflow-y-auto'
+    >
       <div
         className='fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity animate-in fade-in duration-200'
         onClick={isLoading ? undefined : onClose}
@@ -47,13 +59,19 @@ export function ConfirmModal({
           onClick={(e) => e.stopPropagation()}
         >
           <div className='flex border-b border-zinc-200 pb-4 mb-4 justify-between items-center'>
-            <h3 className='text-xl font-bold text-zinc-800'>{title}</h3>
+            <h3
+              id='confirm-modal-title'
+              className='text-xl font-bold text-zinc-800'
+            >
+              {title}
+            </h3>
             <button
               onClick={onClose}
               disabled={isLoading}
+              aria-label='Zamknij okno'
               className='p-2 rounded-md text-zinc-600 hover:text-zinc-800 transition-colors cursor-pointer'
             >
-              <X size={20} />
+              <X size={20} aria-hidden='true' />
             </button>
           </div>
 
@@ -67,12 +85,14 @@ export function ConfirmModal({
                 }`}
               >
                 {variant === 'danger' ? (
-                  <AlertTriangle size={24} />
+                  <AlertTriangle size={24} aria-hidden='true' />
                 ) : (
-                  <Info size={24} />
+                  <Info size={24} aria-hidden='true' />
                 )}
               </div>
-              <p className='text-zinc-600 mt-1'>{description}</p>
+              <p id='confirm-modal-desc' className='text-zinc-600 mt-1'>
+                {description}
+              </p>
             </div>
 
             <div className='flex gap-3 justify-end pt-2'>

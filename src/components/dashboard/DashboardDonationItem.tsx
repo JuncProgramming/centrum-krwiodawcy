@@ -24,7 +24,7 @@ export function DonationItem({
   };
 
   return (
-    <div className='p-3 sm:p-4 bg-white border border-zinc-200 rounded-md transition-shadow hover:shadow-sm flex justify-between items-start gap-3 sm:gap-4'>
+    <li className='p-3 sm:p-4 bg-white border border-zinc-200 rounded-md transition-shadow hover:shadow-sm flex justify-between items-start gap-3 sm:gap-4'>
       <div className='min-w-0 flex-1'>
         <div className='flex flex-wrap items-center gap-x-2 gap-y-1 mb-1.5'>
           <p className='font-semibold text-zinc-800'>
@@ -38,12 +38,12 @@ export function DonationItem({
         </div>
         <div className='flex items-center gap-1.5 text-sm text-zinc-600 mb-1'>
           <Calendar size={14} className='shrink-0' />
-          <span className='mt-0.5'>
+          <time dateTime={donation.date} className='mt-0.5'>
             {new Date(donation.date).toLocaleDateString('pl-PL')}
-          </span>
+          </time>
         </div>
         <div className='flex items-center gap-1.5 text-xs text-zinc-500'>
-          <MapPin size={14} className='shrink-0' />
+          <MapPin size={14} className='shrink-0' aria-hidden='true' />
           <span className='mt-0.5'>{donation.location}</span>
         </div>
       </div>
@@ -54,8 +54,9 @@ export function DonationItem({
             onClick={() => onViewResult(donation.results_url!)}
             className='p-2 border cursor-pointer border-blue-200 rounded-md text-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-colors'
             title='Zobacz wyniki badań'
+            aria-label='Zobacz wyniki badań'
           >
-            <FileText size={20} />
+            <FileText size={20} aria-hidden='true' />
           </button>
         ) : (
           <>
@@ -66,13 +67,14 @@ export function DonationItem({
               className='hidden'
               accept='.pdf,.jpg,.jpeg,.png'
               onChange={handleFileChange}
+              tabIndex={-1} // This will prevent focus on tab
             />
             <button
               onClick={() => fileInputRef.current?.click()}
               className='p-2 border cursor-pointer border-zinc-200 rounded-md text-zinc-500 hover:text-zinc-600 hover:bg-zinc-50 transition-colors'
               title='Dodaj wyniki badań'
             >
-              <Paperclip size={20} />
+              <Paperclip size={20} aria-hidden='true' />
             </button>
           </>
         )}
@@ -80,10 +82,11 @@ export function DonationItem({
           onClick={() => onDelete(donation.id)}
           className='p-2 border cursor-pointer border-zinc-200 rounded-md text-zinc-500 hover:text-red-500 hover:bg-red-50 hover:border-red-200 transition-colors'
           title='Usuń donację'
+          aria-label='Usuń donację'
         >
-          <Trash2 size={20} />
+          <Trash2 size={20} aria-hidden='true' />
         </button>
       </div>
-    </div>
+    </li>
   );
 }

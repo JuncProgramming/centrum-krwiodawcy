@@ -19,10 +19,16 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !isSubmitting) onClose();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+
     return () => {
       document.body.style.overflow = 'unset';
+      document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [onClose, isSubmitting]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,24 +90,28 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
     <div className='fixed inset-0 z-50 overflow-y-auto'>
       <div
         className='fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity animate-in fade-in duration-200'
-        onClick={onClose}
+        onClick={isSubmitting ? undefined : onClose}
         aria-hidden='true'
       ></div>
 
       <div className='flex min-h-full items-center justify-center p-4 text-center sm:p-6'>
         <div
+          role='dialog'
+          aria-modal='true'
+          aria-labelledby='modal-title'
           className='relative p-4 sm:p-6 transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-full max-w-lg animate-in zoom-in-95 duration-200'
           onClick={(e) => e.stopPropagation()}
         >
           <div className='flex border-b border-zinc-200 pb-4 mb-4 justify-between items-center'>
-            <h3 className='text-xl font-bold text-zinc-800'>
+            <h3 id='modal-title' className='text-xl font-bold text-zinc-800'>
               Dodaj nową donację
             </h3>
             <button
               onClick={onClose}
+              aria-label='Zamknij okno dodawania donacji'
               className='p-2 rounded-md text-zinc-600 hover:text-zinc-800 transition-colors cursor-pointer'
             >
-              <X size={20} />
+              <X size={20} aria-hidden='true' />
             </button>
           </div>
 
@@ -125,10 +135,10 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                 />
               </div>
 
-              <div className='flex flex-col'>
-                <label className='mb-1 font-medium text-zinc-600'>
+              <fieldset className='flex flex-col'>
+                <legend className='mb-1 font-medium text-zinc-600'>
                   Typ donacji
-                </label>
+                </legend>
                 <div className='space-y-2'>
                   <div className='flex items-stretch'>
                     <label className='flex-1 flex items-center p-2.5 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors min-w-0'>
@@ -154,6 +164,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                       <div className='w-24 relative h-full'>
                         <input
                           type='number'
+                          aria-label='Ilość oddanej krwi pełnej w mililitrach'
                           value={amount}
                           onChange={(e) => setAmount(Number(e.target.value))}
                           className='w-full h-full p-3 pr-8 border border-zinc-300 rounded-md text-center font-medium text-zinc-700 bg-white hover:bg-zinc-50 transition-all focus:outline-none'
@@ -188,6 +199,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                     >
                       <div className='w-24 relative h-full'>
                         <input
+                          aria-label='Ilość oddanego osocza w mililitrach'
                           type='number'
                           value={amount}
                           onChange={(e) => setAmount(Number(e.target.value))}
@@ -225,6 +237,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                         <input
                           type='number'
                           value={amount}
+                          aria-label='Ilość oddanych płytek krwi w mililitrach'
                           onChange={(e) => setAmount(Number(e.target.value))}
                           className='w-full h-full p-3 pr-8 border border-zinc-300 rounded-md text-center font-medium text-zinc-700 bg-white hover:bg-zinc-50 transition-all focus:outline-none'
                         />
@@ -235,7 +248,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                     </div>
                   </div>
                 </div>
-              </div>
+              </fieldset>
 
               <div className='flex flex-col'>
                 <label
@@ -256,9 +269,9 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
               </div>
 
               <div className='flex flex-col'>
-                <label className='mb-1 font-medium text-zinc-600'>
+                <span className='mb-1 font-medium text-zinc-600'>
                   Wyniki badań (opcjonalne)
-                </label>
+                </span>
                 <label
                   htmlFor='file'
                   onDragOver={handleDragOver}
@@ -271,7 +284,10 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                   }`}
                 >
                   <div className='flex flex-col items-center justify-center pt-5 pb-6'>
-                    <Upload className='w-8 h-8 mb-2 text-zinc-400' />
+                    <Upload
+                      className='w-8 h-8 mb-2 text-zinc-400'
+                      aria-hidden='true'
+                    />
                     <p className='mb-2 text-sm text-zinc-500'>
                       <span className='font-semibold'>
                         Kliknij lub upuść plik

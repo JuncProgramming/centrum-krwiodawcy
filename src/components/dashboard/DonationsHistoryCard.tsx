@@ -12,30 +12,29 @@ const DonationsHistoryCard = ({
 }: DonationsHistoryCardProps) => {
   return (
     <BaseDashboardCard title='Historia donacji'>
-      <div className='flex flex-col grow'>
-        {donations.length === 0 ? (
+      {donations.length === 0 ? (
+        <div className='flex flex-col grow'>
           <p className='text-zinc-600 text-sm'>Brak zapisanych donacji.</p>
-        ) : (
-          donations.map((donation, index) => (
-            <div
+        </div>
+      ) : (
+        <ul className='flex flex-col grow gap-3'>
+          {donations.map((donation) => (
+            <DonationItem
               key={donation.id}
-              className={index === donations.length - 1 ? '' : 'mb-3'}
-            >
-              <DonationItem
-                donation={donation}
-                onDelete={onDelete}
-                onUpload={onUpload}
-                onViewResult={onViewResult}
-              />
-            </div>
-          ))
-        )}
-      </div>
+              donation={donation}
+              onDelete={onDelete}
+              onUpload={onUpload}
+              onViewResult={onViewResult}
+            />
+          ))}
+        </ul>
+      )}
+
       <button
         onClick={onClick}
         className='w-full mt-3 bg-red-600 text-white font-semibold py-2.5 px-6 rounded-md hover:bg-red-700 transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer'
       >
-        <Plus size={20} />
+        <Plus size={20} aria-hidden='true' />
         Dodaj donację
       </button>
     </BaseDashboardCard>

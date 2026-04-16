@@ -9,10 +9,10 @@ const StatisticsCard = ({ donations }: StatisticsCardProps) => {
 
   return (
     <BaseDashboardCard title='Statystyki'>
-      <div className='flex flex-col gap-3'>
-        <div className='flex items-center p-2.5 sm:p-3 bg-red-50/50 rounded-xl border border-red-200'>
+      <ul className='flex flex-col gap-3'>
+        <li className='flex items-center p-2.5 sm:p-3 bg-red-50/50 rounded-xl border border-red-200'>
           <div className='p-1.5 sm:p-2 bg-red-100 text-red-600 rounded-lg shrink-0 mr-3'>
-            <Activity className='w-4 h-4 sm:w-5 sm:h-5' />
+            <Activity className='w-4 h-4 sm:w-5 sm:h-5' aria-hidden='true' />
           </div>
           <div className='flex flex-col'>
             <span className='text-sm sm:text-base font-medium text-zinc-700'>
@@ -22,11 +22,15 @@ const StatisticsCard = ({ donations }: StatisticsCardProps) => {
               {savedLives}
             </span>
           </div>
-        </div>
+        </li>
 
-        <div className='flex items-center p-2.5 sm:p-3 bg-red-50/50 rounded-xl border border-red-200'>
+        <li className='flex items-center p-2.5 sm:p-3 bg-red-50/50 rounded-xl border border-red-200'>
           <div className='p-1.5 sm:p-2 bg-red-100 text-red-600 rounded-lg shrink-0 mr-3'>
-            <Droplet fill='currentColor' className='w-4 h-4 sm:w-5 sm:h-5' />
+            <Droplet
+              fill='currentColor'
+              className='w-4 h-4 sm:w-5 sm:h-5'
+              aria-hidden='true'
+            />
           </div>
           <div className='flex flex-col'>
             <span className='text-sm sm:text-base font-medium text-zinc-700'>
@@ -41,12 +45,16 @@ const StatisticsCard = ({ donations }: StatisticsCardProps) => {
               </span>
             </span>
           </div>
-        </div>
+        </li>
 
         {statsByType.osocze > 0 && (
-          <div className='flex items-center p-2.5 sm:p-3 bg-orange-50/50 rounded-xl border border-orange-200'>
+          <li className='flex items-center p-2.5 sm:p-3 bg-orange-50/50 rounded-xl border border-orange-200'>
             <div className='p-1.5 sm:p-2 bg-orange-100 text-orange-600 rounded-lg shrink-0 mr-3'>
-              <Droplet fill='currentColor' className='w-4 h-4 sm:w-5 sm:h-5' />
+              <Droplet
+                fill='currentColor'
+                className='w-4 h-4 sm:w-5 sm:h-5'
+                aria-hidden='true'
+              />
             </div>
             <div className='flex flex-col'>
               <span className='text-sm sm:text-base font-medium text-zinc-700'>
@@ -59,13 +67,17 @@ const StatisticsCard = ({ donations }: StatisticsCardProps) => {
                 </span>
               </span>
             </div>
-          </div>
+          </li>
         )}
 
         {statsByType.plytki_krwi > 0 && (
-          <div className='flex items-center p-2.5 sm:p-3 bg-yellow-50/50 rounded-xl border border-yellow-200'>
+          <li className='flex items-center p-2.5 sm:p-3 bg-yellow-50/50 rounded-xl border border-yellow-200'>
             <div className='p-1.5 sm:p-2 bg-yellow-100 text-yellow-600 rounded-lg shrink-0 mr-3'>
-              <Droplet fill='currentColor' className='w-4 h-4 sm:w-5 sm:h-5' />
+              <Droplet
+                fill='currentColor'
+                className='w-4 h-4 sm:w-5 sm:h-5'
+                aria-hidden='true'
+              />
             </div>
             <div className='flex flex-col'>
               <span className='text-sm sm:text-base font-medium text-zinc-700'>
@@ -80,12 +92,12 @@ const StatisticsCard = ({ donations }: StatisticsCardProps) => {
                 </span>
               </span>
             </div>
-          </div>
+          </li>
         )}
 
-        <div className='flex items-center p-2.5 sm:p-3 bg-zinc-50/50 rounded-xl border border-zinc-200'>
+        <li className='flex items-center p-2.5 sm:p-3 bg-zinc-50/50 rounded-xl border border-zinc-200'>
           <div className='p-1.5 sm:p-2 bg-white text-zinc-600 rounded-lg border border-zinc-200 shrink-0 mr-3'>
-            <Hash className='w-4 h-4 sm:w-5 sm:h-5' />
+            <Hash className='w-4 h-4 sm:w-5 sm:h-5' aria-hidden='true' />
           </div>
           <div className='flex flex-col'>
             <span className='text-sm sm:text-base font-medium text-zinc-700'>
@@ -95,26 +107,33 @@ const StatisticsCard = ({ donations }: StatisticsCardProps) => {
               {totalDonations}
             </span>
           </div>
-        </div>
+        </li>
 
         {totalDonations > 0 && (
-          <div className='flex items-center p-2.5 sm:p-3 bg-zinc-50/50 rounded-xl border border-zinc-200'>
+          <li className='flex items-center p-2.5 sm:p-3 bg-zinc-50/50 rounded-xl border border-zinc-200'>
             <div className='p-1.5 sm:p-2 bg-white text-zinc-600 rounded-lg border border-zinc-200 shrink-0 mr-3'>
-              <Calendar className='w-4 h-4 sm:w-5 sm:h-5' />
+              <Calendar className='w-4 h-4 sm:w-5 sm:h-5' aria-hidden='true' />
             </div>
             <div className='flex flex-col'>
               <span className='text-sm sm:text-base font-medium text-zinc-700'>
                 Ostatnia donacja
               </span>
-              <span className='text-base sm:text-lg font-bold text-zinc-900 leading-none mt-0.5'>
-                {lastDonationDate
-                  ? lastDonationDate.toLocaleDateString('pl-PL')
-                  : '-'}
-              </span>
+              {lastDonationDate ? (
+                <time
+                  dateTime={lastDonationDate.toISOString()}
+                  className='text-base sm:text-lg font-bold text-zinc-900 leading-none mt-0.5'
+                >
+                  {lastDonationDate.toLocaleDateString('pl-PL')}
+                </time>
+              ) : (
+                <span className='text-base sm:text-lg font-bold text-zinc-900 leading-none mt-0.5'>
+                  -
+                </span>
+              )}
             </div>
-          </div>
+          </li>
         )}
-      </div>
+      </ul>
     </BaseDashboardCard>
   );
 };

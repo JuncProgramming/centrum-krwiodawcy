@@ -36,7 +36,10 @@ export function Header() {
   return (
     <>
       <header className='w-full bg-white border-b border-zinc-200 sticky top-0 z-50'>
-        <nav className='max-w-[2560px] mx-auto flex items-center justify-between px-4 py-3 md:px-6 md:py-4'>
+        <nav
+          aria-label='Nawigacja główna'
+          className='max-w-[2560px] mx-auto flex items-center justify-between px-4 py-3 md:px-6 md:py-4'
+        >
           <Link
             to='/'
             className='flex items-center text-base md:text-lg font-bold text-red-600 hover:text-red-700 transition-colors'
@@ -58,14 +61,14 @@ export function Header() {
                   to='/dashboard'
                   className='flex items-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2 px-4 rounded-md hover:bg-zinc-100 transition-colors whitespace-nowrap'
                 >
-                  <User size={16} />
+                  <User size={16} aria-hidden='true' />
                   {user.user_metadata?.first_name}
                 </Link>
                 <button
                   onClick={handleSignOut}
                   className='flex items-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2 px-4 rounded-md hover:bg-zinc-100 transition-colors whitespace-nowrap cursor-pointer'
                 >
-                  <LogOut size={16} />
+                  <LogOut size={16} aria-hidden='true' />
                   Wyloguj
                 </button>
               </>
@@ -93,8 +96,13 @@ export function Header() {
             className='md:hidden p-1.5 text-zinc-700 hover:bg-zinc-100 rounded-md transition-colors cursor-pointer'
             aria-label='Toggle menu'
             aria-expanded={isMobileMenuOpen}
+            aria-controls='mobile-menu'
           >
-            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {isMobileMenuOpen ? (
+              <X size={20} aria-hidden='true' />
+            ) : (
+              <Menu size={20} aria-hidden='true' />
+            )}
           </button>
         </nav>
       </header>
@@ -102,17 +110,16 @@ export function Header() {
       {isMobileMenuOpen && (
         <>
           <div
-            className='md:hidden fixed bg-black/20 z-40'
+            className='md:hidden fixed inset-0 z-40 bg-black/20 top-[60px]'
             onClick={() => setIsMobileMenuOpen(false)}
             aria-hidden='true'
           />
 
-          <div className='md:hidden fixed top-14 left-0 right-0 bg-white shadow-lg z-40 max-h-[calc(100vh-56px)] overflow-y-auto'>
-            <nav
-              className='flex flex-col p-3'
-              role='navigation'
-              aria-label='Mobile navigation'
-            >
+          <div
+            id='mobile-menu'
+            className='md:hidden fixed top-14 left-0 right-0 bg-white shadow-lg z-40 max-h-[calc(100vh-56px)] overflow-y-auto'
+          >
+            <nav className='flex flex-col p-3' aria-label='Nawigacja mobilna'>
               <Link
                 to='/faq'
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -128,7 +135,7 @@ export function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className='flex items-center justify-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2.5 px-3 rounded-md hover:bg-zinc-100 transition-colors mt-2'
                   >
-                    <User size={16} />
+                    <User size={16} aria-hidden='true' />
                     {user.user_metadata?.first_name}
                   </Link>
                   <button
@@ -138,7 +145,7 @@ export function Header() {
                     }}
                     className='flex items-center justify-center gap-2 text-sm font-semibold text-zinc-700 border border-zinc-300 py-2.5 px-3 rounded-md hover:bg-zinc-100 transition-colors mt-2 cursor-pointer'
                   >
-                    <LogOut size={16} />
+                    <LogOut size={16} aria-hidden='true' />
                     Wyloguj
                   </button>
                 </>

@@ -56,13 +56,23 @@ describe('TaxReliefCalculator', () => {
     const button = screen.getByRole('button', { name: String(currentYear) });
     await user.click(button);
 
-    const dropdown = screen.getByRole('button', {
+    const listbox = screen.getByRole('listbox', {
+      name: /wybierz rok rozliczeniowy/i
+    });
+    expect(listbox).toBeVisible();
+
+    const dropdown = screen.getByRole('option', {
       name: String(previousYear)
     });
     expect(dropdown).toBeVisible();
 
     await user.click(button);
-    expect(dropdown).not.toBeVisible();
+    expect(
+      screen.queryByRole('listbox', { name: /wybierz rok rozliczeniowy/i })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('option', { name: String(previousYear) })
+    ).not.toBeInTheDocument();
   });
 
   it('should recalculate tax relief when a different year is selected', async () => {
@@ -82,7 +92,7 @@ describe('TaxReliefCalculator', () => {
     await user.click(screen.getByRole('button', { name: String(currentYear) }));
 
     await user.click(
-      screen.getByRole('button', { name: String(previousYear) })
+      screen.getByRole('option', { name: String(previousYear) })
     );
 
     expect(calculateTaxRelief).toHaveBeenLastCalledWith(
@@ -105,14 +115,16 @@ describe('TaxReliefCalculator', () => {
 
     await user.click(screen.getByRole('button', { name: String(currentYear) }));
 
-    const dropdownOption = screen.getByRole('button', {
+    const dropdownOption = screen.getByRole('option', {
       name: String(previousYear)
     });
     expect(dropdownOption).toBeVisible();
 
     await user.click(document.body);
 
-    expect(dropdownOption).not.toBeVisible();
+    expect(
+      screen.queryByRole('option', { name: String(previousYear) })
+    ).not.toBeInTheDocument();
   });
 
   it('should display correct link to government website', () => {
