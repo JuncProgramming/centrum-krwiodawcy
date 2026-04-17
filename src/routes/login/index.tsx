@@ -41,7 +41,7 @@ function LoginPage() {
 
   return (
     <div className='bg-white w-xl max-w-md rounded-lg shadow-sm border border-zinc-200 p-8'>
-      <div
+      <header
         className={`p-2 ${waterfallAnimationClass}`}
         style={{ animationDelay: getWaterfallAnimationDelay(0) }}
       >
@@ -51,7 +51,7 @@ function LoginPage() {
         <p className='text-zinc-600 text-center mb-4'>
           Witaj ponownie! Zaloguj się do swojego konta
         </p>
-      </div>
+      </header>
 
       <form
         onSubmit={handleSubmit}

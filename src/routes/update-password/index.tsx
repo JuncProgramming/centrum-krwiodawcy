@@ -89,7 +89,7 @@ function UpdatePasswordPage() {
 
   return (
     <div className='bg-white rounded-lg shadow-sm border border-zinc-200 p-8 w-xl max-w-md'>
-      <div
+      <header
         className={`p-2 ${waterfallAnimationClass}`}
         style={{ animationDelay: getWaterfallAnimationDelay(0) }}
       >
@@ -99,7 +99,7 @@ function UpdatePasswordPage() {
         <p className='text-zinc-600 text-center mb-4'>
           Wprowadź swoje nowe hasło.
         </p>
-      </div>
+      </header>
 
       {message ? (
         <div

@@ -48,7 +48,7 @@ function ForgotPasswordPage() {
 
   return (
     <div className='bg-white rounded-lg w-xl max-w-md shadow-sm border border-zinc-200 p-8'>
-      <div
+      <header
         className={`p-2 flex flex-col items-center ${waterfallAnimationClass}`}
         style={{ animationDelay: getWaterfallAnimationDelay(0) }}
       >
@@ -58,7 +58,7 @@ function ForgotPasswordPage() {
         <p className='text-zinc-600 text-center mb-4 max-w-xs'>
           Podaj swój e-mail, aby otrzymać link do zmiany hasła
         </p>
-      </div>
+      </header>
 
       {message ? (
         <div

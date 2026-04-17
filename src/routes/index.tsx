@@ -21,7 +21,7 @@ function HomePage() {
         <br /> <span className='whitespace-nowrap'>Zostań krwiodawcą.</span>
       </h1>
 
-      <div
+      <section
         className={`w-full max-w-2xl p-8 bg-zinc-50 border border-zinc-200 rounded-xl shadow-sm ${waterfallAnimationClass}`}
         style={{ animationDelay: getWaterfallAnimationDelay(1) }}
       >
@@ -29,7 +29,7 @@ function HomePage() {
           Pierwszą donację masz za sobą? Sprawdź możliwy termin kolejnej.
         </h2>
         <DonationCalculator />
-      </div>
+      </section>
 
       <div
         className={`text-center ${waterfallAnimationClass}`}

@@ -17,10 +17,11 @@ function FaqPage() {
       >
         Jak zacząć oddawać krew?
       </h1>
-      <div className='w-full max-w-3xl space-y-3'>
+
+      <ul className='w-full max-w-3xl space-y-3'>
         {faqData.map((card, index) => {
           return (
-            <div
+            <li
               key={card.id}
               className={waterfallAnimationClass}
               style={{
@@ -28,10 +29,10 @@ function FaqPage() {
               }}
             >
               <FaqCard question={card.question}>{card.answer}</FaqCard>
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
 
       <div
         className={`text-center ${waterfallAnimationClass}`}

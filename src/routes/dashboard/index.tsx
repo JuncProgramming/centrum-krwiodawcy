@@ -127,7 +127,7 @@ function Dashboard() {
                 donations={donations}
                 gender={user?.user_metadata?.gender}
               />
-              <div className='my-4 border-t border-zinc-200'></div>
+              <hr className='my-4 border-t border-zinc-200' />
               <BadgesGalleryCard
                 donations={donations}
                 gender={user?.user_metadata?.gender}
