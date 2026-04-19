@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { X, Upload } from 'lucide-react';
 import Spinner from '@/components/Spinner';
 import { type AddDonationModalProps } from '@/types';
 import { toast } from 'react-toastify';
-import { MAX_FILE_SIZE, DONATION_LABELS } from '@/constants';
+import { MAX_FILE_SIZE, DONATION_LABELS, controlFocusClass } from '@/constants';
 
 export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
   const [date, setDate] = useState(
@@ -15,6 +15,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
   const [file, setFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -54,6 +55,13 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
     if (newType === 'plytki_krwi') setAmount(500);
   };
 
+  const handleOptionCardKeyDown = (e: React.KeyboardEvent, newType: string) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleTypeChange(newType);
+    }
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const selectedFile = e.target.files[0];
@@ -86,6 +94,22 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
     }
   };
 
+  const openFilePicker = () => {
+    if (isSubmitting) {
+      return;
+    }
+    fileInputRef.current?.click();
+  };
+
+  const handleFilePickerKeyDown = (
+    e: React.KeyboardEvent<HTMLLabelElement>
+  ) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openFilePicker();
+    }
+  };
+
   return (
     <div className='fixed inset-0 z-50 overflow-y-auto'>
       <div
@@ -99,7 +123,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
           role='dialog'
           aria-modal='true'
           aria-labelledby='modal-title'
-          className='relative p-4 sm:p-6 transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-full max-w-lg animate-in zoom-in-95 duration-200'
+          className='relative p-4 sm:p-6 transform rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-full max-w-lg animate-in zoom-in-95 duration-200'
           onClick={(e) => e.stopPropagation()}
         >
           <div className='flex border-b border-zinc-200 pb-4 mb-4 justify-between items-center'>
@@ -109,7 +133,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
             <button
               onClick={onClose}
               aria-label='Zamknij okno dodawania donacji'
-              className='p-2 rounded-md text-zinc-600 hover:text-zinc-800 transition-colors cursor-pointer'
+              className={`p-2 rounded-md text-zinc-600 hover:text-zinc-800 transition-colors cursor-pointer ${controlFocusClass}`}
             >
               <X size={20} aria-hidden='true' />
             </button>
@@ -131,7 +155,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                   value={date}
                   max={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className='w-full p-2 border border-zinc-300 rounded-md focus:ring-red-500 focus:border-red-500'
+                  className={`w-full p-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
                 />
               </div>
 
@@ -141,13 +165,22 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                 </legend>
                 <div className='space-y-2'>
                   <div className='flex items-stretch'>
-                    <label className='flex-1 flex items-center p-2.5 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors min-w-0'>
+                    <label
+                      tabIndex={0}
+                      role='radio'
+                      aria-checked={type === 'krew_pelna'}
+                      onKeyDown={(e) =>
+                        handleOptionCardKeyDown(e, 'krew_pelna')
+                      }
+                      className={`flex-1 flex items-center p-2.5 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors min-w-0 ${controlFocusClass}`}
+                    >
                       <input
                         type='radio'
                         name='donationType'
                         value='krew_pelna'
                         checked={type === 'krew_pelna'}
                         onChange={(e) => handleTypeChange(e.target.value)}
+                        tabIndex={-1}
                         className='w-4 h-4 text-red-600 focus:ring-red-500 shrink-0'
                       />
                       <span className='ml-2 text-sm text-zinc-700 truncate'>
@@ -155,19 +188,21 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                       </span>
                     </label>
                     <div
-                      className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                      className={`transition-all duration-300 ease-in-out overflow-hidden rounded-md ${
                         type === 'krew_pelna'
                           ? 'w-24 opacity-100 ml-2'
                           : 'w-0 opacity-0 ml-0'
                       }`}
                     >
-                      <div className='w-24 relative h-full'>
+                      <div className='w-24 relative h-full rounded-md'>
                         <input
                           type='number'
                           aria-label='Ilość oddanej krwi pełnej w mililitrach'
                           value={amount}
+                          disabled={type !== 'krew_pelna'}
+                          tabIndex={type === 'krew_pelna' ? 0 : -1}
                           onChange={(e) => setAmount(Number(e.target.value))}
-                          className='w-full h-full p-3 pr-8 border border-zinc-300 rounded-md text-center font-medium text-zinc-700 bg-white hover:bg-zinc-50 transition-all focus:outline-none'
+                          className={`w-full h-full p-3 pr-8 border border-zinc-300 rounded-md text-center font-medium text-zinc-700 bg-white hover:bg-zinc-50 transition-colors focus:outline-none focus:ring-1 focus:ring-inset focus:ring-red-500 focus:border-red-500 focus-visible:outline-none ${controlFocusClass}`}
                         />
                         <span className='absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-zinc-400 pointer-events-none'>
                           ml
@@ -177,13 +212,20 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                   </div>
 
                   <div className='flex items-stretch'>
-                    <label className='flex-1 flex items-center p-2.5 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors min-w-0'>
+                    <label
+                      tabIndex={0}
+                      role='radio'
+                      aria-checked={type === 'osocze'}
+                      onKeyDown={(e) => handleOptionCardKeyDown(e, 'osocze')}
+                      className={`flex-1 flex items-center p-2.5 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors min-w-0 ${controlFocusClass}`}
+                    >
                       <input
                         type='radio'
                         name='donationType'
                         value='osocze'
                         checked={type === 'osocze'}
                         onChange={(e) => handleTypeChange(e.target.value)}
+                        tabIndex={-1}
                         className='w-4 h-4 text-red-600 focus:ring-red-500 shrink-0'
                       />
                       <span className='ml-2 text-sm text-zinc-700 truncate'>
@@ -191,19 +233,21 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                       </span>
                     </label>
                     <div
-                      className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                      className={`transition-all duration-300 ease-in-out overflow-hidden rounded-md ${
                         type === 'osocze'
                           ? 'w-24 opacity-100 ml-2'
                           : 'w-0 opacity-0 ml-0'
                       }`}
                     >
-                      <div className='w-24 relative h-full'>
+                      <div className='w-24 relative h-full rounded-md'>
                         <input
                           aria-label='Ilość oddanego osocza w mililitrach'
                           type='number'
                           value={amount}
+                          disabled={type !== 'osocze'}
+                          tabIndex={type === 'osocze' ? 0 : -1}
                           onChange={(e) => setAmount(Number(e.target.value))}
-                          className='w-full h-full p-3 pr-8 border border-zinc-300 rounded-md text-center font-medium text-zinc-700 bg-white hover:bg-zinc-50 transition-all focus:outline-none'
+                          className={`w-full h-full p-3 pr-8 border border-zinc-300 rounded-md text-center font-medium text-zinc-700 bg-white hover:bg-zinc-50 transition-colors focus:outline-none focus:ring-1 focus:ring-inset focus:ring-red-500 focus:border-red-500 focus-visible:outline-none ${controlFocusClass}`}
                         />
                         <span className='absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-zinc-400 pointer-events-none'>
                           ml
@@ -213,13 +257,22 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                   </div>
 
                   <div className='flex items-stretch'>
-                    <label className='flex-1 flex items-center p-2.5 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors min-w-0'>
+                    <label
+                      tabIndex={0}
+                      role='radio'
+                      aria-checked={type === 'plytki_krwi'}
+                      onKeyDown={(e) =>
+                        handleOptionCardKeyDown(e, 'plytki_krwi')
+                      }
+                      className={`flex-1 flex items-center p-2.5 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors min-w-0 ${controlFocusClass}`}
+                    >
                       <input
                         type='radio'
                         name='donationType'
                         value='plytki_krwi'
                         checked={type === 'plytki_krwi'}
                         onChange={(e) => handleTypeChange(e.target.value)}
+                        tabIndex={-1}
                         className='w-4 h-4 text-red-600 focus:ring-red-500 shrink-0'
                       />
                       <span className='ml-2 text-sm text-zinc-700 truncate'>
@@ -227,19 +280,21 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                       </span>
                     </label>
                     <div
-                      className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                      className={`transition-all duration-300 ease-in-out overflow-hidden rounded-md ${
                         type === 'plytki_krwi'
                           ? 'w-24 opacity-100 ml-2'
                           : 'w-0 opacity-0 ml-0'
                       }`}
                     >
-                      <div className='w-24 relative h-full'>
+                      <div className='w-24 relative h-full rounded-md'>
                         <input
                           type='number'
                           value={amount}
                           aria-label='Ilość oddanych płytek krwi w mililitrach'
+                          disabled={type !== 'plytki_krwi'}
+                          tabIndex={type === 'plytki_krwi' ? 0 : -1}
                           onChange={(e) => setAmount(Number(e.target.value))}
-                          className='w-full h-full p-3 pr-8 border border-zinc-300 rounded-md text-center font-medium text-zinc-700 bg-white hover:bg-zinc-50 transition-all focus:outline-none'
+                          className={`w-full h-full p-3 pr-8 border border-zinc-300 rounded-md text-center font-medium text-zinc-700 bg-white hover:bg-zinc-50 transition-colors focus:outline-none focus:ring-1 focus:ring-inset focus:ring-red-500 focus:border-red-500 focus-visible:outline-none ${controlFocusClass}`}
                         />
                         <span className='absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-zinc-400 pointer-events-none'>
                           ml
@@ -264,7 +319,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   placeholder='np. RCKiK Kraków'
-                  className='w-full p-2 border border-zinc-300 rounded-md focus:ring-red-500 focus:border-red-500'
+                  className={`w-full p-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
                 />
               </div>
 
@@ -274,10 +329,14 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                 </span>
                 <label
                   htmlFor='file'
+                  role='button'
+                  tabIndex={0}
+                  aria-disabled={isSubmitting}
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                   onDrop={handleDrop}
-                  className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
+                  onKeyDown={handleFilePickerKeyDown}
+                  className={`flex flex-col items-center bior justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${controlFocusClass} ${
                     isDragging
                       ? 'border-red-500 bg-red-50'
                       : 'border-zinc-300 bg-zinc-50 hover:bg-zinc-100'
@@ -300,6 +359,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                   <input
                     id='file'
                     type='file'
+                    ref={fileInputRef}
                     className='hidden'
                     accept='.pdf,.jpg,.jpeg,.png'
                     onChange={handleFileChange}
@@ -316,7 +376,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
               <button
                 type='submit'
                 disabled={isSubmitting}
-                className='w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors flex justify-center items-center gap-2 disabled:opacity-70 cursor-pointer'
+                className={`w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors flex justify-center items-center gap-2 disabled:opacity-70 cursor-pointer ${controlFocusClass}`}
               >
                 {isSubmitting && <Spinner size='sm' />}
                 {isSubmitting ? 'Zapisywanie...' : 'Zapisz'}

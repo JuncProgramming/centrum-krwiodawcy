@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { type DonationType } from '@/types';
 import { calculateNextDonationDate } from '@/utils';
-import { DONATION_LABELS } from '@/constants';
+import { DONATION_LABELS, controlFocusClass } from '@/constants';
 
 export function DonationCalculator() {
   const [lastDonationDate, setLastDonationDate] = useState(
@@ -30,6 +30,16 @@ export function DonationCalculator() {
     setCalculatedNextDonationType(nextDonationType);
   };
 
+  const handleOptionCardKeyDown = (
+    e: React.KeyboardEvent,
+    onSelect: () => void
+  ) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onSelect();
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className='space-y-6'>
@@ -43,7 +53,7 @@ export function DonationCalculator() {
             required
             value={lastDonationDate}
             onChange={(e) => setLastDonationDate(e.target.value)}
-            className='p-2 border border-zinc-300 rounded-md w-full'
+            className={`p-2 border border-zinc-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
           />
         </div>
 
@@ -52,7 +62,17 @@ export function DonationCalculator() {
             Co oddano (ostatnio):
           </legend>
           <div className='space-y-2'>
-            <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
+            <label
+              tabIndex={0}
+              role='radio'
+              aria-checked={lastDonationType === 'krew_pelna'}
+              onKeyDown={(e) =>
+                handleOptionCardKeyDown(e, () =>
+                  setLastDonationType('krew_pelna')
+                )
+              }
+              className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+            >
               <input
                 type='radio'
                 name='lastDonationType'
@@ -61,13 +81,22 @@ export function DonationCalculator() {
                 onChange={(e) =>
                   setLastDonationType(e.target.value as DonationType)
                 }
+                tabIndex={-1}
                 className='w-4 h-4 text-red-600 focus:ring-red-500'
               />
               <span className='ml-3 text-zinc-700'>
                 {DONATION_LABELS.krew_pelna}
               </span>
             </label>
-            <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
+            <label
+              tabIndex={0}
+              role='radio'
+              aria-checked={lastDonationType === 'osocze'}
+              onKeyDown={(e) =>
+                handleOptionCardKeyDown(e, () => setLastDonationType('osocze'))
+              }
+              className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+            >
               <input
                 type='radio'
                 name='lastDonationType'
@@ -76,13 +105,24 @@ export function DonationCalculator() {
                 onChange={(e) =>
                   setLastDonationType(e.target.value as DonationType)
                 }
+                tabIndex={-1}
                 className='w-4 h-4 text-red-600 focus:ring-red-500'
               />
               <span className='ml-3 text-zinc-700'>
                 {DONATION_LABELS.osocze} (Plazma)
               </span>
             </label>
-            <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
+            <label
+              tabIndex={0}
+              role='radio'
+              aria-checked={lastDonationType === 'plytki_krwi'}
+              onKeyDown={(e) =>
+                handleOptionCardKeyDown(e, () =>
+                  setLastDonationType('plytki_krwi')
+                )
+              }
+              className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+            >
               <input
                 type='radio'
                 name='lastDonationType'
@@ -91,6 +131,7 @@ export function DonationCalculator() {
                 onChange={(e) =>
                   setLastDonationType(e.target.value as DonationType)
                 }
+                tabIndex={-1}
                 className='w-4 h-4 text-red-600 focus:ring-red-500'
               />
               <span className='ml-3 text-zinc-700'>
@@ -105,7 +146,17 @@ export function DonationCalculator() {
             Co chcesz oddać (teraz):
           </legend>
           <div className='space-y-2'>
-            <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
+            <label
+              tabIndex={0}
+              role='radio'
+              aria-checked={nextDonationType === 'krew_pelna'}
+              onKeyDown={(e) =>
+                handleOptionCardKeyDown(e, () =>
+                  setNextDonationType('krew_pelna')
+                )
+              }
+              className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+            >
               <input
                 type='radio'
                 name='nextDonationType'
@@ -114,13 +165,22 @@ export function DonationCalculator() {
                 onChange={(e) =>
                   setNextDonationType(e.target.value as DonationType)
                 }
+                tabIndex={-1}
                 className='w-4 h-4 text-red-600 focus:ring-red-500'
               />
               <span className='ml-3 text-zinc-700'>
                 {DONATION_LABELS.krew_pelna}
               </span>
             </label>
-            <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
+            <label
+              tabIndex={0}
+              role='radio'
+              aria-checked={nextDonationType === 'osocze'}
+              onKeyDown={(e) =>
+                handleOptionCardKeyDown(e, () => setNextDonationType('osocze'))
+              }
+              className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+            >
               <input
                 type='radio'
                 name='nextDonationType'
@@ -129,13 +189,24 @@ export function DonationCalculator() {
                 onChange={(e) =>
                   setNextDonationType(e.target.value as DonationType)
                 }
+                tabIndex={-1}
                 className='w-4 h-4 text-red-600 focus:ring-red-500'
               />
               <span className='ml-3 text-zinc-700'>
                 {DONATION_LABELS.osocze} (Plazma)
               </span>
             </label>
-            <label className='flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors'>
+            <label
+              tabIndex={0}
+              role='radio'
+              aria-checked={nextDonationType === 'plytki_krwi'}
+              onKeyDown={(e) =>
+                handleOptionCardKeyDown(e, () =>
+                  setNextDonationType('plytki_krwi')
+                )
+              }
+              className={`flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors ${controlFocusClass}`}
+            >
               <input
                 type='radio'
                 name='nextDonationType'
@@ -144,6 +215,7 @@ export function DonationCalculator() {
                 onChange={(e) =>
                   setNextDonationType(e.target.value as DonationType)
                 }
+                tabIndex={-1}
                 className='w-4 h-4 text-red-600 focus:ring-red-500'
               />
               <span className='ml-3 text-zinc-700'>
@@ -156,7 +228,7 @@ export function DonationCalculator() {
 
       <button
         type='submit'
-        className='w-full mt-3 bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors cursor-pointer'
+        className={`w-full mt-3 bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700 transition-colors cursor-pointer ${controlFocusClass}`}
       >
         Sprawdź termin
       </button>
