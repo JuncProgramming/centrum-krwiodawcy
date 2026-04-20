@@ -115,3 +115,10 @@ export type Badge = {
   colors: BadgeColors;
   thresholdLiters: (gender: string) => number;
 };
+
+export type CustomDatePickerProps = {
+  accessibilityId: string;
+  date: string;
+  onDateChange: (date: string) => void;
+  onOpenChange?: (isOpen: boolean) => void;
+};

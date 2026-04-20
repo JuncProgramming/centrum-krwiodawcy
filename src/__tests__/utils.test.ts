@@ -3,7 +3,10 @@ import {
   getDonationsWordForm,
   normalizeType,
   calculateNextDonationDate,
-  buildGoogleMapsLink
+  buildGoogleMapsLink,
+  parseDate,
+  formatDateForDisplay,
+  formatDateForStorage
 } from '@/utils';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import type { Donation } from '@/types';
@@ -262,6 +265,62 @@ describe('getDonationsWordForm', () => {
     { count: 25, expected: 'donacji' }
   ])('should return $expected for number $count', ({ count, expected }) => {
     expect(getDonationsWordForm(count)).toBe(expected);
+  });
+});
+
+describe('parseDate', () => {
+  it('should return a valid Date for a valid ISO string', () => {
+    const result = parseDate('2025-01-15');
+
+    expect(result).toBeDefined();
+    expect(result).toBeInstanceOf(Date);
+    expect(result?.getFullYear()).toBe(2025);
+    expect(result?.getMonth()).toBe(0);
+    expect(result?.getDate()).toBe(15);
+  });
+
+  it('should return undefined for an empty value', () => {
+    expect(parseDate('')).toBeUndefined();
+  });
+
+  it('should return undefined for an invalid date string', () => {
+    expect(parseDate('not-a-date')).toBeUndefined();
+  });
+});
+
+describe('formatDateDisplay', () => {
+  it('should format a valid date using DISPLAY_DATE_FORMAT and Polish locale', () => {
+    const date = new Date('2025-01-15');
+    const result = formatDateForDisplay(date);
+
+    expect(result).toBe('15 stycznia 2025');
+  });
+
+  it('should return placeholder text for undefined', () => {
+    expect(formatDateForDisplay(undefined)).toBe('Wybierz datę');
+  });
+});
+
+describe('formatDateForStorage', () => {
+  it('should format a date in STORAGE_DATE_FORMAT (YYYY-MM-DD)', () => {
+    const date = new Date('2025-01-15');
+    const result = formatDateForStorage(date);
+
+    expect(result).toBe('2025-01-15');
+  });
+
+  it('should handle dates with single-digit months and days', () => {
+    const date = new Date('2025-02-05');
+    const result = formatDateForStorage(date);
+
+    expect(result).toBe('2025-02-05');
+  });
+
+  it('should handle year boundaries correctly', () => {
+    const date = new Date('2025-12-31');
+    const result = formatDateForStorage(date);
+
+    expect(result).toBe('2025-12-31');
   });
 });
 

@@ -1,7 +1,9 @@
 import type { DonationType } from '@/types';
 
-export const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 MB
+export const STORAGE_DATE_FORMAT = 'yyyy-MM-dd';
+export const DISPLAY_DATE_FORMAT = 'd MMMM yyyy';
 
+export const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 MB
 export const TAX_RELIEF_PER_LITER = 130; /// 130zł
 
 export const TYPE_VOLUME_MULTIPLIER = {
@@ -29,7 +31,6 @@ export const STATUS_CARD_LABELS = {
 };
 
 export const WATERFALL_ANIMATION_DELAY = 100; // ms
-
 export const AUTH_LOADING_SPINNER_DELAY = 100; // ms
 
 export const waterfallAnimationClass =

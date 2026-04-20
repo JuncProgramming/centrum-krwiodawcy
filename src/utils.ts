@@ -1,9 +1,13 @@
 import {
   TAX_RELIEF_PER_LITER,
   TYPE_VOLUME_MULTIPLIER,
-  WATERFALL_ANIMATION_DELAY
+  WATERFALL_ANIMATION_DELAY,
+  DISPLAY_DATE_FORMAT,
+  STORAGE_DATE_FORMAT
 } from '@/constants';
 import type { Donation } from '@/types';
+import { isValid, parseISO, format } from 'date-fns';
+import { pl } from 'date-fns/locale';
 
 export const normalizeType = (type: string) => {
   const cleanType = type.trim().toLowerCase();
@@ -118,6 +122,25 @@ export const getDonationsWordForm = (count: number) => {
   }
 
   return 'donacji';
+};
+
+export const parseDate = (value: string): Date | undefined => {
+  if (!value) {
+    return undefined;
+  }
+
+  const parsedDate = parseISO(value);
+  return isValid(parsedDate) ? parsedDate : undefined;
+};
+
+export const formatDateForDisplay = (date: Date | undefined): string => {
+  return date
+    ? format(date, DISPLAY_DATE_FORMAT, { locale: pl })
+    : 'Wybierz datę';
+};
+
+export const formatDateForStorage = (date: Date): string => {
+  return format(date, STORAGE_DATE_FORMAT);
 };
 
 export const buildGoogleMapsLink = (
