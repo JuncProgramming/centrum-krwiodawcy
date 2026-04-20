@@ -121,4 +121,5 @@ export type CustomDatePickerProps = {
   date: string;
   onDateChange: (date: string) => void;
   onOpenChange?: (isOpen: boolean) => void;
+  background?: string;
 };
