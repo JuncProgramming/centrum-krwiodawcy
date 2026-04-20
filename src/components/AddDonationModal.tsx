@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { FocusTrap } from 'focus-trap-react';
 import { X, Upload } from 'lucide-react';
 import Spinner from '@/components/Spinner';
+import CustomDatePicker from '@/components/CustomDatePicker';
 import { type AddDonationModalProps } from '@/types';
 import { toast } from 'react-toastify';
 import { MAX_FILE_SIZE, DONATION_LABELS, controlFocusClass } from '@/constants';
@@ -16,13 +17,14 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
   const [file, setFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && !isSubmitting) onClose();
+      if (e.key === 'Escape' && !isSubmitting && !isDatePickerOpen) onClose();
     };
     document.addEventListener('keydown', handleKeyDown);
 
@@ -30,7 +32,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
       document.body.style.overflow = 'unset';
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onClose, isSubmitting]);
+  }, [onClose, isSubmitting, isDatePickerOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -155,14 +157,11 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                   >
                     Data donacji
                   </label>
-                  <input
-                    type='date'
-                    id='date'
-                    required
-                    value={date}
-                    max={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className={`w-full p-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
+                  <CustomDatePicker
+                    accessibilityId='date'
+                    date={date}
+                    onDateChange={setDate}
+                    onOpenChange={setIsDatePickerOpen}
                   />
                 </div>
 
@@ -211,7 +210,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                             onChange={(e) => setAmount(Number(e.target.value))}
                             className={`w-full h-full p-3 pr-8 border border-zinc-300 rounded-md text-center font-medium text-zinc-700 bg-white hover:bg-zinc-50 transition-colors focus:outline-none focus:ring-1 focus:ring-inset focus:ring-red-500 focus:border-red-500 focus-visible:outline-none ${controlFocusClass}`}
                           />
-                          <span className='absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-zinc-400 pointer-events-none'>
+                          <span className='absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-zinc-400 pointer-events-none z-30 bg-white px-0.5'>
                             ml
                           </span>
                         </div>
@@ -256,7 +255,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                             onChange={(e) => setAmount(Number(e.target.value))}
                             className={`w-full h-full p-3 pr-8 border border-zinc-300 rounded-md text-center font-medium text-zinc-700 bg-white hover:bg-zinc-50 transition-colors focus:outline-none focus:ring-1 focus:ring-inset focus:ring-red-500 focus:border-red-500 focus-visible:outline-none ${controlFocusClass}`}
                           />
-                          <span className='absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-zinc-400 pointer-events-none'>
+                          <span className='absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-zinc-400 pointer-events-none z-30 bg-white px-0.5'>
                             ml
                           </span>
                         </div>
@@ -303,7 +302,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                             onChange={(e) => setAmount(Number(e.target.value))}
                             className={`w-full h-full p-3 pr-8 border border-zinc-300 rounded-md text-center font-medium text-zinc-700 bg-white hover:bg-zinc-50 transition-colors focus:outline-none focus:ring-1 focus:ring-inset focus:ring-red-500 focus:border-red-500 focus-visible:outline-none ${controlFocusClass}`}
                           />
-                          <span className='absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-zinc-400 pointer-events-none'>
+                          <span className='absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium text-zinc-400 pointer-events-none z-30 bg-white px-0.5'>
                             ml
                           </span>
                         </div>
@@ -326,7 +325,7 @@ export function AddDonationModal({ onClose, onSave }: AddDonationModalProps) {
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder='np. RCKiK Kraków'
-                    className={`w-full p-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
+                    className={`w-full p-2 border hover:bg-zinc-50 border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
                   />
                 </div>
 

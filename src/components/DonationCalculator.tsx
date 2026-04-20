@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { type DonationType } from '@/types';
 import { calculateNextDonationDate } from '@/utils';
+import CustomDatePicker from '@/components/CustomDatePicker';
 import { DONATION_LABELS, controlFocusClass } from '@/constants';
 
 export function DonationCalculator() {
@@ -44,16 +45,17 @@ export function DonationCalculator() {
     <form onSubmit={handleSubmit}>
       <div className='space-y-6'>
         <div className='flex flex-col'>
-          <label htmlFor='date' className='mb-1 font-medium text-zinc-600'>
+          <label
+            htmlFor='last-donation-date'
+            className='mb-1 font-medium text-zinc-600'
+          >
             Data ostatniej donacji:
           </label>
-          <input
-            type='date'
-            id='date'
-            required
-            value={lastDonationDate}
-            onChange={(e) => setLastDonationDate(e.target.value)}
-            className={`p-2 border border-zinc-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ${controlFocusClass}`}
+          <CustomDatePicker
+            accessibilityId='last-donation-date'
+            date={lastDonationDate}
+            onDateChange={setLastDonationDate}
+            background='bg-zinc-50'
           />
         </div>
 
@@ -71,7 +73,7 @@ export function DonationCalculator() {
                   setLastDonationType('krew_pelna')
                 )
               }
-              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors focus-within:z-10 ${controlFocusClass}`}
+              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-white transition-colors focus-within:z-10 bg-zinc-50 ${controlFocusClass}`}
             >
               <input
                 type='radio'
@@ -95,7 +97,7 @@ export function DonationCalculator() {
               onKeyDown={(e) =>
                 handleOptionCardKeyDown(e, () => setLastDonationType('osocze'))
               }
-              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors focus-within:z-10 ${controlFocusClass}`}
+              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-white transition-colors focus-within:z-10 bg-zinc-50 ${controlFocusClass}`}
             >
               <input
                 type='radio'
@@ -121,7 +123,7 @@ export function DonationCalculator() {
                   setLastDonationType('plytki_krwi')
                 )
               }
-              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors focus-within:z-10 ${controlFocusClass}`}
+              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-white transition-colors focus-within:z-10 bg-zinc-50 ${controlFocusClass}`}
             >
               <input
                 type='radio'
@@ -155,7 +157,7 @@ export function DonationCalculator() {
                   setNextDonationType('krew_pelna')
                 )
               }
-              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors focus-within:z-10 ${controlFocusClass}`}
+              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-white transition-colors focus-within:z-10 bg-zinc-50 ${controlFocusClass}`}
             >
               <input
                 type='radio'
@@ -179,7 +181,7 @@ export function DonationCalculator() {
               onKeyDown={(e) =>
                 handleOptionCardKeyDown(e, () => setNextDonationType('osocze'))
               }
-              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors focus-within:z-10 ${controlFocusClass}`}
+              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-white transition-colors focus-within:z-10 bg-zinc-50 ${controlFocusClass}`}
             >
               <input
                 type='radio'
@@ -205,7 +207,7 @@ export function DonationCalculator() {
                   setNextDonationType('plytki_krwi')
                 )
               }
-              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-zinc-50 transition-colors focus-within:z-10 ${controlFocusClass}`}
+              className={`relative flex items-center p-3 border border-zinc-300 rounded-md cursor-pointer hover:bg-white transition-colors focus-within:z-10 bg-zinc-50 ${controlFocusClass}`}
             >
               <input
                 type='radio'
