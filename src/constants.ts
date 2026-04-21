@@ -1,7 +1,7 @@
 import type { DonationType } from '@/types';
 
-export const STORAGE_DATE_FORMAT = 'yyyy-MM-dd';
-export const DISPLAY_DATE_FORMAT = 'd MMMM yyyy';
+export const STORAGE_DATE_FORMAT = 'yyyy-MM-dd'; // 2026-04-21
+export const DISPLAY_DATE_FORMAT = 'd MMMM yyyy'; // 21 April 2026
 
 export const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 MB
 export const TAX_RELIEF_PER_LITER = 130; /// 130zł
