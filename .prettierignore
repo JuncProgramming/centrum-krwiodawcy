@@ -1,3 +1,6 @@
 dist
 src/routeTree.gen.ts
 **/routeTree.gen.ts
+
+# TanStack Router generated file
+routeTree.gen.ts

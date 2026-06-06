@@ -55,12 +55,12 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardIndexRoute
-  '/faq': typeof FaqIndexRoute
-  '/forgot-password': typeof ForgotPasswordIndexRoute
-  '/login': typeof LoginIndexRoute
-  '/register': typeof RegisterIndexRoute
-  '/update-password': typeof UpdatePasswordIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/faq/': typeof FaqIndexRoute
+  '/forgot-password/': typeof ForgotPasswordIndexRoute
+  '/login/': typeof LoginIndexRoute
+  '/register/': typeof RegisterIndexRoute
+  '/update-password/': typeof UpdatePasswordIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -85,12 +85,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/dashboard'
-    | '/faq'
-    | '/forgot-password'
-    | '/login'
-    | '/register'
-    | '/update-password'
+    | '/dashboard/'
+    | '/faq/'
+    | '/forgot-password/'
+    | '/login/'
+    | '/register/'
+    | '/update-password/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,42 +133,42 @@ declare module '@tanstack/react-router' {
     '/update-password/': {
       id: '/update-password/'
       path: '/update-password'
-      fullPath: '/update-password'
+      fullPath: '/update-password/'
       preLoaderRoute: typeof UpdatePasswordIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/register/': {
       id: '/register/'
       path: '/register'
-      fullPath: '/register'
+      fullPath: '/register/'
       preLoaderRoute: typeof RegisterIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login/': {
       id: '/login/'
       path: '/login'
-      fullPath: '/login'
+      fullPath: '/login/'
       preLoaderRoute: typeof LoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/forgot-password/': {
       id: '/forgot-password/'
       path: '/forgot-password'
-      fullPath: '/forgot-password'
+      fullPath: '/forgot-password/'
       preLoaderRoute: typeof ForgotPasswordIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq/': {
       id: '/faq/'
       path: '/faq'
-      fullPath: '/faq'
+      fullPath: '/faq/'
       preLoaderRoute: typeof FaqIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/dashboard'
-      fullPath: '/dashboard'
+      fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
