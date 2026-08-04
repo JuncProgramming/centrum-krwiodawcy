@@ -13,7 +13,7 @@ export type RCKiKLocation = {
 
 export type Donation = {
   id: string;
-  type: 'krew_pelna' | 'osocze' | 'plytki_krwi';
+  type: DonationType;
   date: string;
   location: string;
   amount: number;
