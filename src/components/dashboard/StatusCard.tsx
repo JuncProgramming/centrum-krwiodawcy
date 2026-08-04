@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import type { StatusCardProps } from '@/types';
 import {
   STATUS_CARD_LABELS,
@@ -14,12 +13,6 @@ export default function StatusCard({
   targetDonationType,
   onTargetDonationTypeChange
 }: StatusCardProps) {
-  const [displayedType, setDisplayedType] = useState(targetDonationType);
-
-  useEffect(() => {
-    setDisplayedType(targetDonationType);
-  }, [targetDonationType]);
-
   return (
     <section
       className={`p-6 rounded-lg border shadow-sm transition-all grid duration-300 ease-in-out ${
@@ -72,9 +65,9 @@ export default function StatusCard({
               <div className='flex items-center'>
                 <span className='text-3xl font-bold text-green-600'>
                   Możesz już oddać{' '}
-                  {displayedType === 'osocze'
+                  {targetDonationType === 'osocze'
                     ? 'osocze'
-                    : displayedType === 'plytki_krwi'
+                    : targetDonationType === 'plytki_krwi'
                       ? 'płytki krwi'
                       : 'krew pełną'}
                 </span>

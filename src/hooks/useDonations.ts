@@ -13,29 +13,48 @@ export function useDonations({
   const [donations, setDonations] = useState<Donation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchDonations = useCallback(async () => {
-    if (!userId) return;
-    try {
-      const { data, error } = await supabase
-        .from('donations')
-        .select('*')
-        .eq('user_id', userId)
-        .order('date', { ascending: false })
-        .order('created_at', { ascending: false });
+  const getDonations = useCallback(async () => {
+    const { data, error } = await supabase
+      .from('donations')
+      .select('*')
+      .eq('user_id', userId)
+      .order('date', { ascending: false })
+      .order('created_at', { ascending: false });
 
-      if (error) throw error;
-      setDonations(data as Donation[]);
+    if (error) throw error;
+    return data as Donation[];
+  }, [userId]);
+
+  const fetchDonations = useCallback(async () => {
+    try {
+      setDonations(await getDonations());
     } catch (error) {
       console.error(error);
       toast.error('Nie udało się pobrać historii donacji.');
-    } finally {
-      setIsLoading(false);
     }
-  }, [userId]);
+  }, [getDonations]);
 
   useEffect(() => {
-    fetchDonations();
-  }, [fetchDonations]);
+    if (!userId) return;
+
+    let ignore = false;
+
+    getDonations()
+      .then((data) => {
+        if (!ignore) setDonations(data);
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error('Nie udało się pobrać historii donacji.');
+      })
+      .finally(() => {
+        if (!ignore) setIsLoading(false);
+      });
+
+    return () => {
+      ignore = true;
+    };
+  }, [userId, getDonations]);
 
   const lastDonation = donations[0];
   // If there is a lastDonation, destructure the thing and calculate the next donation date, else default
