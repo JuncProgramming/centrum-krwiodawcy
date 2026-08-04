@@ -6,6 +6,13 @@ import { MAX_FILE_SIZE } from '@/constants';
 import { calculateNextDonationDate } from '@/utils';
 import type { useDonationsArgs } from '@/types';
 
+const createResultsFilePath = (userId: string | undefined, file: File) => {
+  const extension = file.name.includes('.')
+    ? `.${file.name.split('.').pop()}`
+    : '';
+  return `${userId}/${Date.now()}_${crypto.randomUUID()}${extension}`;
+};
+
 export function useDonations({
   userId,
   targetDonationType = 'krew_pelna'
@@ -87,9 +94,7 @@ export function useDonations({
           return;
         }
 
-        const fileExt = newData.file.name.split('.').pop();
-        const fileName = `${crypto.randomUUID()}.${fileExt}`;
-        const filePath = `${userId}/${Date.now()}_${fileName}`;
+        const filePath = createResultsFilePath(userId, newData.file);
 
         const { error: uploadError } = await supabase.storage
           .from('donation-results')
@@ -137,7 +142,12 @@ export function useDonations({
           .from('donation-results')
           .remove([resultsPath]);
 
-        if (storageError) console.error(storageError);
+        if (storageError) {
+          console.error(
+            `Failed to remove results file for donation ${id} at ${resultsPath}`,
+            storageError
+          );
+        }
       }
 
       await fetchDonations();
@@ -156,9 +166,7 @@ export function useDonations({
     }
 
     try {
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${crypto.randomUUID()}.${fileExt}`;
-      const filePath = `${userId}/${Date.now()}_${fileName}`;
+      const filePath = createResultsFilePath(userId, file);
 
       const { error: uploadError } = await supabase.storage
         .from('donation-results')
