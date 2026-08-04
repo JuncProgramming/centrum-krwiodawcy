@@ -69,7 +69,7 @@ export function useDonations({
         }
 
         const fileExt = newData.file.name.split('.').pop();
-        const fileName = `${Math.random()}.${fileExt}`;
+        const fileName = `${crypto.randomUUID()}.${fileExt}`;
         const filePath = `${userId}/${Date.now()}_${fileName}`;
 
         const { error: uploadError } = await supabase.storage
@@ -104,10 +104,22 @@ export function useDonations({
   };
 
   const handleDeleteDonation = async (id: string) => {
+    const resultsPath = donations.find(
+      (donation) => donation.id === id
+    )?.results_url;
+
     try {
       const { error } = await supabase.from('donations').delete().eq('id', id);
 
       if (error) throw error;
+
+      if (resultsPath) {
+        const { error: storageError } = await supabase.storage
+          .from('donation-results')
+          .remove([resultsPath]);
+
+        if (storageError) console.error(storageError);
+      }
 
       await fetchDonations();
       toast.success('Donacja została usunięta');
@@ -126,7 +138,7 @@ export function useDonations({
 
     try {
       const fileExt = file.name.split('.').pop();
-      const fileName = `${Math.random()}.${fileExt}`;
+      const fileName = `${crypto.randomUUID()}.${fileExt}`;
       const filePath = `${userId}/${Date.now()}_${fileName}`;
 
       const { error: uploadError } = await supabase.storage

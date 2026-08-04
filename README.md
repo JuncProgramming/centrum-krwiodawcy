@@ -40,11 +40,11 @@
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/JuncProgramming/kalendarz-krwiodawcy.git
+    git clone https://github.com/JuncProgramming/centrum-krwiodawcy.git
     ```
 2.  Navigate to the project directory:
     ```bash
-    cd kalendarz-krwiodawcy
+    cd centrum-krwiodawcy
     ```
 3.  Install dependencies:
     ```bash
