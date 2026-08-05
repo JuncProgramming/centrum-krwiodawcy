@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type ReactNode, type RefObject } from 'react';
 
 export type DonationType = 'krew_pelna' | 'osocze' | 'plytki_krwi';
 
@@ -37,6 +37,7 @@ export type BaseDashboardCardProps = {
   title: string;
   children?: ReactNode;
   donations?: Donation[];
+  className?: string;
 };
 
 export type AddDonationModalProps = {
@@ -78,6 +79,11 @@ export type DonationsHistoryCardProps = {
   onDelete: (id: string) => void;
   onUpload: (id: string, file: File) => void;
   onViewResult: (path: string) => void;
+  listRef?: RefObject<HTMLUListElement | null>;
+};
+
+export type RCKiKMapCardProps = {
+  fill?: boolean;
 };
 
 export type ConfirmModalProps = {

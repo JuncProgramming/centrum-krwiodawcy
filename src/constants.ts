@@ -45,3 +45,13 @@ export const textLinkFocusClass =
   'no-underline outline-2 outline-transparent rounded outline-offset-4 focus-visible:outline-zinc-800';
 
 export const AUTHENTICATED_HOME_ROUTE = '/dashboard';
+
+// Smallest the map CARD may be squeezed to when it sits inline in the left
+// column. The card spends roughly 120px on its title, description and footer, so
+// this leaves ~360px of actual map — below that it stops being usable.
+export const MIN_INLINE_MAP_HEIGHT = 480;
+
+// Largest the map card may grow to when the column has slack — with a
+// near-empty history and an expanded badge gallery the map would otherwise
+// swallow the whole column. Past this the left column just ends early.
+export const MAX_INLINE_MAP_HEIGHT = 720;

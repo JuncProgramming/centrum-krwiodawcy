@@ -24,7 +24,7 @@ export function DonationItem({
   };
 
   return (
-    <li className='p-3 sm:p-4 bg-white border border-zinc-200 rounded-md transition-shadow hover:shadow-sm flex justify-between items-start gap-3 sm:gap-4'>
+    <li className='p-3 sm:p-4 shrink-0 bg-white border border-zinc-200 rounded-md transition-shadow hover:shadow-sm flex justify-between items-start gap-3 sm:gap-4'>
       <div className='min-w-0 flex-1'>
         <div className='flex flex-wrap items-center gap-x-2 gap-y-1 mb-1.5'>
           <p className='font-semibold text-zinc-800'>

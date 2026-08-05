@@ -13,7 +13,11 @@ import BadgeGoalCard from '@/components/dashboard/BadgeGoalCard';
 import BadgesGalleryCard from '@/components/dashboard/BadgesGalleryCard';
 import { RCKiKMapCard } from '@/components/dashboard/RCKiKMapCard';
 import { useDonations } from '@/hooks/useDonations';
-import { waterfallAnimationClass } from '@/constants';
+import {
+  waterfallAnimationClass,
+  MIN_INLINE_MAP_HEIGHT,
+  MAX_INLINE_MAP_HEIGHT
+} from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
 import { requireSession } from '@/lib/routeGuards';
 
@@ -88,9 +92,14 @@ function Dashboard() {
       </h1>
 
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
-        <div className='lg:col-span-2 space-y-6'>
+        {/* h-0 + min-h-full keeps this column from setting the row height, so it
+            always matches the sidebar block and the history list scrolls
+            internally instead of stretching the page. The 83rem floor is sized so
+            the status card, ~4.5 history rows and the map at its minimum height
+            all fit even when the sidebar is shorter. */}
+        <div className='lg:col-span-2 flex flex-col gap-6 lg:h-0 lg:min-h-[max(100%,83rem)]'>
           <div
-            className={waterfallAnimationClass}
+            className={`shrink-0 ${waterfallAnimationClass}`}
             style={{ animationDelay: getWaterfallAnimationDelay(1) }}
           >
             <StatusCard
@@ -104,7 +113,7 @@ function Dashboard() {
           </div>
 
           <div
-            className={waterfallAnimationClass}
+            className={`min-h-0 flex flex-col ${waterfallAnimationClass}`}
             style={{ animationDelay: getWaterfallAnimationDelay(2) }}
           >
             <DonationsHistoryCard
@@ -115,9 +124,27 @@ function Dashboard() {
               onViewResult={handleViewResult}
             />
           </div>
+
+          {/* Fills whatever the history leaves over rather than letting it sit
+              empty. grow + a flex-basis floor means the map absorbs the slack
+              while the history keeps its natural height. The max-height ceiling
+              stops a near-empty history from handing the map the whole column —
+              past it the column simply ends early. */}
+          <div
+            className={`grow shrink-0 min-h-0 flex flex-col ${waterfallAnimationClass}`}
+            style={{
+              flexBasis: MIN_INLINE_MAP_HEIGHT,
+              maxHeight: MAX_INLINE_MAP_HEIGHT,
+              animationDelay: getWaterfallAnimationDelay(6)
+            }}
+          >
+            <RCKiKMapCard fill />
+          </div>
         </div>
 
-        <div className='space-y-6'>
+        {/* self-start keeps this at its natural height; it defines the row
+            height the left column stretches to match. */}
+        <div className='flex flex-col gap-6 lg:self-start'>
           <div
             className={waterfallAnimationClass}
             style={{ animationDelay: getWaterfallAnimationDelay(3) }}
@@ -147,13 +174,6 @@ function Dashboard() {
             style={{ animationDelay: getWaterfallAnimationDelay(5) }}
           >
             <TaxReliefCalculator donations={donations} />
-          </div>
-
-          <div
-            className={waterfallAnimationClass}
-            style={{ animationDelay: getWaterfallAnimationDelay(6) }}
-          >
-            <RCKiKMapCard />
           </div>
         </div>
       </div>
