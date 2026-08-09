@@ -61,8 +61,6 @@ const DonationsHistoryCard = ({
         </div>
       ) : (
         <div className='relative flex min-h-0 grow flex-col'>
-          {/* tabIndex makes the list keyboard-scrollable once it overflows;
-              without it arrow keys cannot reach the clipped donations. */}
           <ul
             ref={(node) => {
               internalListRef.current = node;

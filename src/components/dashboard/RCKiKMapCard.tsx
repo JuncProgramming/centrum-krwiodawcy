@@ -34,8 +34,6 @@ export function RCKiKMapCard({ fill = false }: RCKiKMapCardProps) {
     const wrapper = mapWrapperRef.current;
     if (!wrapper) return;
 
-    // In fill mode the map's height tracks the space the column has left over,
-    // so it changes without a remount and Leaflet has to be told each time.
     const observer = new ResizeObserver(() => {
       mapRef.current?.invalidateSize();
     });

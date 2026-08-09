@@ -152,8 +152,6 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* self-start keeps this at its natural height; it defines the row
-            height the left column stretches to match. */}
         <div ref={sidebarRef} className='flex flex-col gap-6 lg:self-start'>
           <div
             className={waterfallAnimationClass}

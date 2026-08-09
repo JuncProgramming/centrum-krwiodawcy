@@ -5,7 +5,6 @@ import { faqData } from '@/data/faqData';
 import { waterfallAnimationClass, textLinkFocusClass } from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
 
-// Lazy so Leaflet stays out of the FAQ chunk and loads after first paint.
 const RCKiKMapCard = lazy(() => import('@/components/dashboard/RCKiKMapCard'));
 
 export const Route = createFileRoute('/faq/')({

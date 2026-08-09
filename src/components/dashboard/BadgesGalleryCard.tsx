@@ -44,9 +44,6 @@ const BadgesGalleryCard = ({
         }`}
       >
         <div className='overflow-hidden'>
-          {/* Column count follows the card's own width, not the viewport — badge
-              names are long, so they need ~150px each to avoid shredding into
-              one-word-per-line. */}
           <ul className='grid grid-cols-2 @min-[26rem]:grid-cols-3 @min-[38rem]:grid-cols-4 @min-[52rem]:grid-cols-5 gap-2 pt-4'>
             {badges.map((badge) => {
               const isUnlocked = badge.isUnlocked;
