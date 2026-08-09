@@ -1,10 +1,14 @@
 import { useState, useId } from 'react';
-import type { BadgesCardProps } from '@/types';
+import type { BadgesGalleryCardProps } from '@/types';
 import { Medal, ChevronDown } from 'lucide-react';
 import { useBadges } from '@/hooks/useBadges';
 import { controlFocusClass } from '@/constants';
 
-const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
+const BadgesGalleryCard = ({
+  donations,
+  gender,
+  galleryRef
+}: BadgesGalleryCardProps) => {
   const { badges } = useBadges({ donations, gender });
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const galleryId = useId();
@@ -31,6 +35,7 @@ const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
       </div>
 
       <div
+        ref={galleryRef}
         id={galleryId}
         className={`grid transition-all duration-300 ease-in-out ${
           isGalleryOpen

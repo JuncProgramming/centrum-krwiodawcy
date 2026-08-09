@@ -1,8 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { lazy, Suspense } from 'react';
 import FaqCard from '@/components/FaqCard';
 import { faqData } from '@/data/faqData';
 import { waterfallAnimationClass, textLinkFocusClass } from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
+
+// Lazy so Leaflet stays out of the FAQ chunk and loads after first paint.
+const RCKiKMapCard = lazy(() => import('@/components/dashboard/RCKiKMapCard'));
 
 export const Route = createFileRoute('/faq/')({
   component: FaqPage
@@ -18,26 +22,43 @@ function FaqPage() {
         Jak zacząć oddawać krew?
       </h1>
 
-      <ul className='w-full max-w-3xl space-y-3'>
-        {faqData.map((card, index) => {
-          return (
-            <li
-              key={card.id}
-              className={waterfallAnimationClass}
-              style={{
-                animationDelay: getWaterfallAnimationDelay(index + 1)
-              }}
-            >
-              <FaqCard question={card.question}>{card.answer}</FaqCard>
-            </li>
-          );
-        })}
-      </ul>
+      <div className='w-full max-w-3xl space-y-3'>
+        <ul className='space-y-3'>
+          {faqData.map((card, index) => {
+            return (
+              <li
+                key={card.id}
+                className={waterfallAnimationClass}
+                style={{
+                  animationDelay: getWaterfallAnimationDelay(index + 1)
+                }}
+              >
+                <FaqCard question={card.question}>{card.answer}</FaqCard>
+              </li>
+            );
+          })}
+        </ul>
+
+        <section
+          className={waterfallAnimationClass}
+          style={{
+            animationDelay: getWaterfallAnimationDelay(faqData.length + 1)
+          }}
+        >
+          <Suspense
+            fallback={
+              <div className='w-full h-[320px] sm:h-[400px] lg:h-[500px] rounded-lg bg-zinc-100 animate-pulse' />
+            }
+          >
+            <RCKiKMapCard />
+          </Suspense>
+        </section>
+      </div>
 
       <div
         className={`text-center ${waterfallAnimationClass}`}
         style={{
-          animationDelay: getWaterfallAnimationDelay(faqData.length + 1)
+          animationDelay: getWaterfallAnimationDelay(faqData.length + 2)
         }}
       >
         <p className='text-base text-zinc-600'>

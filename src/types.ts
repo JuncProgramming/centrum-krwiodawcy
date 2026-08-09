@@ -86,6 +86,16 @@ export type RCKiKMapCardProps = {
   fill?: boolean;
 };
 
+export type useDashboardLayoutArgs = {
+  sidebarRef: RefObject<HTMLDivElement | null>;
+  galleryRef: RefObject<HTMLDivElement | null>;
+  statusRef: RefObject<HTMLDivElement | null>;
+  historyRef: RefObject<HTMLDivElement | null>;
+  listRef: RefObject<HTMLUListElement | null>;
+  donations: Donation[];
+  isReady: boolean;
+};
+
 export type ConfirmModalProps = {
   onClose: () => void;
   onConfirm: () => Promise<void> | void;
@@ -100,6 +110,10 @@ export type ConfirmModalProps = {
 export type BadgesCardProps = {
   donations: Donation[];
   gender: string;
+};
+
+export type BadgesGalleryCardProps = BadgesCardProps & {
+  galleryRef?: RefObject<HTMLDivElement | null>;
 };
 
 export type useBadgesArgs = {
