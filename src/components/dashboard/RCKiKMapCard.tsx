@@ -32,7 +32,7 @@ export function RCKiKMapCard({ fill = false }: RCKiKMapCardProps) {
 
   useEffect(() => {
     const wrapper = mapWrapperRef.current;
-    if (!wrapper) return;
+    if (!wrapper || typeof ResizeObserver === 'undefined') return;
 
     const observer = new ResizeObserver(() => {
       mapRef.current?.invalidateSize();
