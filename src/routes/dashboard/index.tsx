@@ -4,7 +4,7 @@ import Spinner from '@/components/Spinner';
 import { BaseDashboardCard } from '@/components/dashboard/BaseDashboardCard';
 import { AddDonationModal } from '@/components/AddDonationModal';
 import { ConfirmModal } from '@/components/ConfirmModal';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import DonationsHistoryCard from '@/components/dashboard/DonationsHistoryCard';
 import StatusCard from '@/components/dashboard/StatusCard';
 import StatisticsCard from '@/components/dashboard/StatisticsCard';
@@ -13,7 +13,8 @@ import BadgeGoalCard from '@/components/dashboard/BadgeGoalCard';
 import BadgesGalleryCard from '@/components/dashboard/BadgesGalleryCard';
 import { RCKiKMapCard } from '@/components/dashboard/RCKiKMapCard';
 import { useDonations } from '@/hooks/useDonations';
-import { waterfallAnimationClass } from '@/constants';
+import { useDashboardLayout } from '@/hooks/useDashboardLayout';
+import { waterfallAnimationClass, MIN_INLINE_MAP_HEIGHT } from '@/constants';
 import { getWaterfallAnimationDelay } from '@/utils';
 import { requireSession } from '@/lib/routeGuards';
 
@@ -39,6 +40,12 @@ function Dashboard() {
   const [donationToDelete, setDonationToDelete] = useState<string | null>(null);
   const [targetDonationType, setTargetDonationType] = useState('krew_pelna');
 
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const statusRef = useRef<HTMLDivElement>(null);
+  const historyRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+
   const {
     donations,
     isLoading,
@@ -51,6 +58,16 @@ function Dashboard() {
     canDonate,
     progress
   } = useDonations({ userId: user.id, targetDonationType });
+
+  const { columnMinHeight, mapHeight } = useDashboardLayout({
+    sidebarRef,
+    galleryRef,
+    statusRef,
+    historyRef,
+    listRef,
+    donations,
+    isReady: !isLoading
+  });
 
   useEffect(() => {
     const {
@@ -88,9 +105,13 @@ function Dashboard() {
       </h1>
 
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
-        <div className='lg:col-span-2 space-y-6'>
+        <div
+          className='lg:col-span-2 flex flex-col gap-6 lg:h-0 lg:min-h-[max(100%,80.5rem)] lg:transition-[min-height] duration-300 ease-in-out'
+          style={{ minHeight: columnMinHeight ?? undefined }}
+        >
           <div
-            className={waterfallAnimationClass}
+            ref={statusRef}
+            className={`shrink-0 ${waterfallAnimationClass}`}
             style={{ animationDelay: getWaterfallAnimationDelay(1) }}
           >
             <StatusCard
@@ -104,20 +125,34 @@ function Dashboard() {
           </div>
 
           <div
-            className={waterfallAnimationClass}
+            ref={historyRef}
+            className={`${
+              donations.length === 0 ? 'shrink-0' : 'min-h-0 max-h-[42.5rem]'
+            } flex flex-col ${waterfallAnimationClass}`}
             style={{ animationDelay: getWaterfallAnimationDelay(2) }}
           >
             <DonationsHistoryCard
               donations={donations}
+              listRef={listRef}
               onClick={() => setIsModalOpen(true)}
               onDelete={(id) => setDonationToDelete(id)}
               onUpload={handleUploadResults}
               onViewResult={handleViewResult}
             />
           </div>
+
+          <div
+            className={`shrink-0 min-h-0 flex flex-col lg:transition-[height] duration-300 ease-in-out ${waterfallAnimationClass}`}
+            style={{
+              height: mapHeight ?? MIN_INLINE_MAP_HEIGHT,
+              animationDelay: getWaterfallAnimationDelay(6)
+            }}
+          >
+            <RCKiKMapCard fill />
+          </div>
         </div>
 
-        <div className='space-y-6'>
+        <div ref={sidebarRef} className='flex flex-col gap-6 lg:self-start'>
           <div
             className={waterfallAnimationClass}
             style={{ animationDelay: getWaterfallAnimationDelay(3) }}
@@ -131,6 +166,7 @@ function Dashboard() {
               <BadgesGalleryCard
                 donations={donations}
                 gender={user?.user_metadata?.gender}
+                galleryRef={galleryRef}
               />
             </BaseDashboardCard>
           </div>
@@ -147,13 +183,6 @@ function Dashboard() {
             style={{ animationDelay: getWaterfallAnimationDelay(5) }}
           >
             <TaxReliefCalculator donations={donations} />
-          </div>
-
-          <div
-            className={waterfallAnimationClass}
-            style={{ animationDelay: getWaterfallAnimationDelay(6) }}
-          >
-            <RCKiKMapCard />
           </div>
         </div>
       </div>

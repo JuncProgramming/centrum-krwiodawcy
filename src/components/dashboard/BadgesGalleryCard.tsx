@@ -1,16 +1,20 @@
 import { useState, useId } from 'react';
-import type { BadgesCardProps } from '@/types';
+import type { BadgesGalleryCardProps } from '@/types';
 import { Medal, ChevronDown } from 'lucide-react';
 import { useBadges } from '@/hooks/useBadges';
 import { controlFocusClass } from '@/constants';
 
-const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
+const BadgesGalleryCard = ({
+  donations,
+  gender,
+  galleryRef
+}: BadgesGalleryCardProps) => {
   const { badges } = useBadges({ donations, gender });
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const galleryId = useId();
 
   return (
-    <div className='w-full'>
+    <div className='@container w-full'>
       <div className='flex w-full items-center justify-between'>
         <span className='font-medium text-zinc-700'>Galeria odznak</span>
         <button
@@ -31,6 +35,7 @@ const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
       </div>
 
       <div
+        ref={galleryRef}
         id={galleryId}
         className={`grid transition-all duration-300 ease-in-out ${
           isGalleryOpen
@@ -39,7 +44,7 @@ const BadgesGalleryCard = ({ donations, gender }: BadgesCardProps) => {
         }`}
       >
         <div className='overflow-hidden'>
-          <ul className='grid grid-cols-2 md:grid-cols-3 gap-2 pt-4'>
+          <ul className='grid grid-cols-2 @min-[26rem]:grid-cols-3 @min-[38rem]:grid-cols-4 @min-[52rem]:grid-cols-5 gap-2 pt-4'>
             {badges.map((badge) => {
               const isUnlocked = badge.isUnlocked;
 

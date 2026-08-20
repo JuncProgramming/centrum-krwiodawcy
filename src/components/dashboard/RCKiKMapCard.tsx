@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { BaseDashboardCard } from '@/components/dashboard/BaseDashboardCard';
+import type { RCKiKMapCardProps } from '@/types';
 import { Globe, Phone, MapPin, X } from 'lucide-react';
 import {
   rckikLocations,
@@ -17,8 +18,9 @@ import {
   textLinkFocusClass
 } from '@/constants';
 
-export function RCKiKMapCard() {
+export function RCKiKMapCard({ fill = false }: RCKiKMapCardProps) {
   const mapRef = useRef<L.Map | null>(null);
+  const mapWrapperRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (mapRef.current) {
@@ -28,13 +30,33 @@ export function RCKiKMapCard() {
     }
   }, []);
 
+  useEffect(() => {
+    const wrapper = mapWrapperRef.current;
+    if (!wrapper || typeof ResizeObserver === 'undefined') return;
+
+    const observer = new ResizeObserver(() => {
+      mapRef.current?.invalidateSize();
+    });
+    observer.observe(wrapper);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <BaseDashboardCard title='Placówki RCKiK'>
-      <p className='text-sm text-zinc-600 mb-3'>
+    <BaseDashboardCard
+      title='Placówki RCKiK'
+      className={fill ? 'h-full min-h-0' : ''}
+    >
+      <p className='text-sm text-zinc-600 mb-3 shrink-0'>
         Znajdź najbliższy punkt Regionalnego Centrum Krwiodawstwa i
         Krwiolecznictwa
       </p>
-      <div className='h-[400px] w-full rounded-lg overflow-hidden border border-zinc-200 relative z-0'>
+      <div
+        ref={mapWrapperRef}
+        className={`w-full rounded-lg overflow-hidden border border-zinc-200 relative z-0 ${
+          fill ? 'grow min-h-0' : 'h-[320px] sm:h-[400px] lg:h-[500px]'
+        }`}
+      >
         <MapContainer
           center={polandCenter}
           zoom={6}
@@ -136,7 +158,7 @@ export function RCKiKMapCard() {
           })}
         </MapContainer>
       </div>
-      <p className='text-xs text-zinc-500 mt-4'>
+      <p className='text-xs text-zinc-500 mt-4 shrink-0'>
         Kliknij na marker, aby zobaczyć szczegóły punktu
       </p>
     </BaseDashboardCard>
